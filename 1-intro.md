@@ -76,7 +76,7 @@ Erlang/OTP 17 (erts-6) [64-bit] [smp:2:2] [async-threads:0] [hipe] [kernel-poll:
 注意：安装好Erlang后，你需要手动添加环境变量或$PATH。关于环境变量，参考[这里](http://en.wikipedia.org/wiki/Environment_variable)。
 <br/>
 
-## 1.2 交互模式
+## 1.2-交互模式
 安装好Elixir之后，你有了三个可执行文件：```iex```，```elixir```和```elixirc```。
 如果你是用预编译包方式安装的，可以在解压后的bin目录下找到它们。  
 现在我们可以从```iex```开始了（或者是```iex.bat```，如果在Windows上）。交互模式，就是可以向其中输入任何Elixir表达式或命令，然后直接看到表达式或命令的结果。如以下简单的几条命令：
@@ -90,7 +90,7 @@ iex> "hello" <> " world"
 ```
 对这种交互式命令行，相信熟悉ruby，PHP等动态语言的程序员一定不会陌生。
 
-## 1.3 执行脚本
+## 1.3-执行脚本
 把表达式写进脚本文件，可以用```elixir```命令执行它。如：
 ```
 $ cat simple.exs
