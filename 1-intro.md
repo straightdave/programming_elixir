@@ -1,7 +1,7 @@
 1-简介
 ======
 Elixir，读作[ɪ'lɪksər]，意思是灵丹妙药、圣水，而它目前的logo就是蓝色水滴。<br/>
-Elixir是建立在Erlang虚拟机上的一门函数式的、支持元编程的语言。<br/>
+Elixir是一门建立在Erlang虚拟机上的函数式语言,支持元编程。<br/>
 Elixir是一门动态语言，语法本质上来自Erlang，借鉴了ruby。（设计者Jose Valim本人就是Rails的核心工程师之一，资深ruby程序员）。<br/>
 Elixir目的是将Erlang虚拟机换个面貌呈现给消费者（程序员），使得更多人可以利用Erlang语言以下能力：<br/>
   - 并发
@@ -68,6 +68,40 @@ $ make clean test
 如果测试无法通过，可在[repo](https://github.com/elixir-lang/elixir)的Issue里汇报。
 
 ### 安装Erlang
+安装Elixir唯一的要求就是Erlang（V17.0+），它可以很容易地使用[预编译包](https://www.erlang-solutions.com/downloads/download-erlang-otp)安装。如果你想从源码安装，可以去[Erlang网站](http://www.erlang.org/download.html)找找，参考[Riak文档](http://docs.basho.com/riak/1.3.0/tutorials/installation/Installing-Erlang/)。<br/>
+安装好Erlang后，打开命令行（或命令窗口），输入```erl```，应该可以输出Erlang的版本信息，例如：
+```
+Erlang/OTP 17 (erts-6) [64-bit] [smp:2:2] [async-threads:0] [hipe] [kernel-poll:false]
+```
+注意：安装好Erlang后，你需要手动添加环境变量或$PATH。关于环境变量，参考[这里](http://en.wikipedia.org/wiki/Environment_variable)。
+<br/>
+
+## 1.2 交互模式
+安装好Elixir之后，你有了三个可执行文件：```iex```，```elixir```和```elixirc```。
+如果你是用预编译包方式安装的，可以在解压后的bin目录下找到它们。  
+现在我们可以从```iex```开始了（或者是```iex.bat```，如果在Windows上）。交互模式，就是可以向其中输入任何Elixir表达式或命令，然后直接看到表达式或命令的结果。如以下简单的几条命令：
+```
+Interactive Elixir - press Ctrl+C to exit (type h() ENTER for help)
+
+iex> 40 + 2
+42
+iex> "hello" <> " world"
+"hello world"
+```
+对这种交互式命令行，相信熟悉ruby，PHP等动态语言的程序员一定不会陌生。
+
+## 1.3 执行脚本
+把表达式写进脚本文件，可以用```elixir```命令执行它。如：
+```
+$ cat simple.exs
+IO.puts "Hello world
+from Elixir"
+
+$ elixir simple.exs
+Hello world
+from Elixir
+```
+在以后的章节中，我们还会介绍如何编译Elixir程序，以及Mix这样的build工具。
 
 
 
