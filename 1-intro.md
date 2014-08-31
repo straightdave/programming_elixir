@@ -45,7 +45,7 @@ Windows Installer：[Here](http://s3.hex.pm/elixir-websetup.exe) <br/>
     - 使用ports: cd /usr/ports/lang/elixir && make install clean
     - 或使用pkg: pkg install elixir
 <br/>
-以上方法都应该会自动安装Erlang，如果没有，请参考[下面章节](https://github.com/straightdave/programming-elixir/blob/master/1-intro.md#%E5%AE%89%E8%A3%85erlang)。<br/>
+以上方法都应该会自动安装Erlang，如果没有，请参考[下面章节](#%E5%AE%89%E8%A3%85erlang)。<br/>
 
 ### 使用预编译包
 如果想尝鲜，Elixir为每一个release提供了预编译包（编译好并打包的程序，开箱即用）。
