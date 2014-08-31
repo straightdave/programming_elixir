@@ -55,11 +55,11 @@ Windows Installer：[Here](http://s3.hex.pm/elixir-websetup.exe) <br/>
 ### 自己编译安装
 首先[安装Erlang](http://elixir-lang.org/getting_started/1.html#1.5-installing-erlang)，然后在[这里](https://github.com/elixir-lang/elixir/releases/)下载最新的源码，自己使用make工具编译安装。
 注意：在Windows上编译安装请参考https://github.com/elixir-lang/elixir/wiki/Windows
-附上加环境变量的命令
+- 附上加环境变量的命令
 ```
 $ export PATH="$PATH:/path/to/elixir/bin"
 ```
-如果你十分激进，可以直接选择编译安装github上的master分支：
+- 如果你十分激进，可以直接选择编译安装github上的master分支：
 ```
 $ git clone https://github.com/elixir-lang/elixir.git
 $ cd elixir
