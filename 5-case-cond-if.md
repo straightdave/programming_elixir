@@ -196,6 +196,52 @@ iex> if nil do
 
 ## 5.5-```do```语句块
 以上讲解的4种流程控制结构：case，cond，if和unless，它们都被包裹在do/end语句块中。
+即使我们把if语句写成这样：
+```
+iex> if true, do: 1 + 2
+3
+```
+
+在Elixir中，do/end语句块方便地将一组表达式传递给```do:```。以下是等同的：
+```
+iex> if true do
+...>   a = 1 + 2
+...>   a + 10
+...> end
+13
+iex> if true, do: (
+...>   a = 1 + 2
+...>   a + 10
+...> )
+13
+```
+我们称第二种语法使用了**关键字列表（keyword lists）**。我们可以这样传递else：
+```
+iex> if false, do: :this, else: :that
+:that
+```
+
+注意一点，do/end语句块永远是被绑定在最外层的函数调用上。例如：
+```
+iex> is_number if true do
+...>  1 + 2
+...> end
+```
+将被解析为：
+```
+iex> is_number(if true) do
+...>  1 + 2
+...> end
+```
+这使得Elixir认为你是要调用函数is_number/2（第一个参数是if true，第二个是语句块）。
+这时就需要加上括号解决二义性：
+```
+iex> is_number(if true do
+...>  1 + 2
+...> end)
+true
+```
+关键字列表在Elixir语言中占有重要地位，在许多函数和宏中都有使用。后文中还会对其进行详解。
 
 
 
