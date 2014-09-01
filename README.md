@@ -9,3 +9,6 @@ Elixir编程
 [2-基本类型](../master/2-basic-types.md) <br/>
 [3-基本运算符](../master/3-basic-ops.md) <br/>
 [4-模式匹配](../master/4-pattern-matching.md) <br/>
+[5-条件分支](../master/5-case-cond-if.md) <br/>
+[6-二进制-字符串-字符列表](../master/6-bin-str-charlist.md) <br/>
+[7-关键字-图-字典](../master/7-keywords-map-dict.md) <br/>
