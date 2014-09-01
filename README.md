@@ -8,3 +8,4 @@ Elixir编程
 [1-简介](../master/1-intro.md) <br/>
 [2-基本类型](../master/2-basic-types.md) <br/>
 [3-基本运算符](../master/3-basic-ops.md) <br/>
+[4-模式匹配](../master/4-pattern-matching.md) <br/>
