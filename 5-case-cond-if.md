@@ -1,10 +1,10 @@
 5-流程控制
 ==========
-[case]() <br/>
-[卫兵子句中的表达式]() <br/>
-[cond]() <br/>
-[if和unless]() <br/>
-[do语句块]() <br/>
+[case](#51-case) <br/>
+[卫兵子句中的表达式](#52-%E5%8D%AB%E5%85%B5%E5%AD%90%E5%8F%A5%E4%B8%AD%E7%9A%84%E8%A1%A8%E8%BE%BE%E5%BC%8F) <br/>
+[cond](#53-cond) <br/>
+[if和unless](#54-if%E5%92%8Cunless) <br/>
+[do语句块](#55-do%E8%AF%AD%E5%8F%A5%E5%9D%97) <br/>
 
 本章讲解case，cond和if的流程控制结构。
 
