@@ -1,8 +1,8 @@
 6-二进制-字符串-字符列表
 ========================
-[UTF-8和Unicode]() <br/>
-[二进制（和bitstring）]()<br/>
-[字符列表]() <br/>
+[UTF-8和Unicode](#61-utf-8%E5%92%8Cunicode) <br/>
+[二进制（和bitstring）](#62-%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%92%8Cbitstring)<br/>
+[字符列表](#63-%E5%AD%97%E7%AC%A6%E5%88%97%E8%A1%A8) <br/>
 
 在“基本类型”一章中，介绍了字符串，以及使用is_binary/1函数检查它：
 ```
