@@ -12,3 +12,16 @@ Elixir编程
 [5-流程控制](../master/5-case-cond-if.md) <br/>
 [6-二进制-字符串-字符列表](../master/6-bin-str-charlist.md) <br/>
 [7-关键字-图-字典](../master/7-keywords-map-dict.md) <br/>
+[8-模块](../master/8-modules.md) <br/>
+[9-循环](../master/9-recursion.md) <br/>
+[10-Enumerable和流](../master/10-enum-stream.md) <br/>
+[11-进程](../master/11-process.md) <br/>
+[12-IO](../master/12-io.md) <br/>
+[13-别名-require-import](../master/13-alias-req-imp.md) <br/>
+[14-模块属性](../master/14-mod-attr.md) <br/>
+[15-结构体](../master/15-structs.md) <br/>
+[16-协议](../master/16-proto.md) <br/>
+[17-异常处理](../master/17-try-catch.md) <br/>
+[18-理解](../master/18-comprehensions.md) <br/>
+[19-Sigils](../master/19-sigils.md) <br/>
+[20-下一步](../master/20-next.md) <br/>
