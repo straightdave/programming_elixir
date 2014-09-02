@@ -21,6 +21,7 @@ true
 iex> list[:a]
 1
 ```
+>当原子key和关联的值之间没有逗号分隔时，可以把原子的冒号拿到字母的后面
 
 如你所见，Elixir使用比较特殊的语法来定义这样的列表，但实际上它们会映射到一个元组列表。
 因为它们是简单的列表而已，所有针对列表的操作，关键字列表也可以用。
@@ -32,6 +33,142 @@ iex> list ++ [c: 3]
 iex> [a: 0] ++ list
 [a: 0, a: 1, b: 2]
 ```
+上面例子中重复出现了```:a```这个key，这是允许的。
+以这个key取值时，取回来的是第一个找到的（因为有序）：
+```
+iex> new_list = [a: 0] ++ list
+[a: 0, a: 1, b: 2]
+iex> new_list[:a]
+0
+```
 
+关键字列表十分重要，它有两大特点：
+- 有序
+- key可以重复（！仔细看上面两个示例）
 
+例如，[Ecto库](https://github.com/elixir-lang/ecto)使用这两个特点写出了精巧的DSL（用来写数据库query）：
+```
+query = from w in Weather,
+      where: w.prcp > 0,
+      where: w.temp < 20,
+     select: w
+```
 
+这些特性使得关键字列表成了Elixir中为函数提供额外选项的默认手段。
+在第5章我们讨论了if/2宏，提到了下方的语法：
+```
+iex> if false, do: :this, else: :that
+:that
+```
+
+do:和else:对就是关键字列表！事实上代码等同于：
+```
+iex> if(false, [do: :this, else: :that])
+:that
+```
+
+当关键字列表是函数最后一个参数时，方括号就成了可选的。
+
+为了操作关键字列表，Elixir提供了[关键字（keyword）模块](http://elixir-lang.org/docs/stable/elixir/Keyword.html)。
+记住，关键字列表就是简单的列表，和列表一样提供了线性的性能。列表越长，获取长度或找到一个键值的速度越慢。因此，关键字列表在Elixir中一般就作为函数调用的可选项。
+如果你要存储大量数据，并且保证一个键只对应最多一个值，那就使用图。
+
+对关键字列表做模式匹配：
+```
+iex> [a: a] = [a: 1]
+[a: 1]
+iex> a
+1
+iex> [a: a] = [a: 1, b: 2]
+** (MatchError) no match of right hand side value: [a: 1, b: 2]
+iex> [b: b, a: a] = [a: 1, b: 2]
+** (MatchError) no match of right hand side value: [a: 1, b: 2]
+```
+尽管如此，对列表使用模式匹配很少用到。因为不但要元素个数相等，顺序还要匹配。
+
+## 7.2-图（maps）
+无论何时你要是想用键-值结构，图都应该是你的第一选择。Elixir中，用```%{}```定义图：
+```
+iex> map = %{:a => 1, 2 => :b}
+%{2 => :b, :a => 1}
+iex> map[:a]
+1
+iex> map[2]
+:b
+```
+
+和关键字列表对比，图有两主要区别：
+- 图允许任何类型值作为键
+- 图的键没有顺序
+
+如果你向图添加一个已有的键，将会覆盖之前的键-值对：
+```
+iex> %{1 => 1, 1 => 2}
+%{1 => 2}
+```
+
+如果图里面的键都是原子，那么你也可以用关键字列表中的一些语法：
+```
+iex> map = %{a: 1, b: 2}
+%{a: 1, b: 2}
+```
+
+对比关键字列表，图的模式匹配很是有用：
+```
+iex> %{} = %{:a => 1, 2 => :b}
+%{:a => 1, 2 => :b}
+iex> %{:a => a} = %{:a => 1, 2 => :b}
+%{:a => 1, 2 => :b}
+iex> a
+1
+iex> %{:c => c} = %{:a => 1, 2 => :b}
+** (MatchError) no match of right hand side value: %{2 => :b, :a => 1}
+```
+如上所示，图A与另一个图B做匹配。图B中只要包含有图A的键，那么两个图就能匹配上。若图A是个空的，那么任意图B都能匹配上。
+但是如果图B里不包含图A的键，那就匹配失败了。
+
+图还有个有趣的功能：它提供了特殊的语法来修改和访问原子的键：
+```
+iex> map = %{:a => 1, 2 => :b}
+%{:a => 1, 2 => :b}
+iex> map.a
+1
+iex> %{map | :a => 2}
+%{:a => 2, 2 => :b}
+iex> %{map | :c => 3}
+** (ArgumentError) argument error
+```
+
+上面的两种修改语法都需要给的键是存在的。如，最后一条语句错误的原因就是键:c不存在。
+
+未来几章中我们还将讨论结构体（structs）。结构体提供了编译时的保证。以及Elixir多态性的基础。结构体是基于图之上的，上面例子提到的修改保证就变得十分重要。
+
+[图模块](http://elixir-lang.org/docs/stable/elixir/Map.html)提供了许多关于图的操作。它提供了与关键字列表许多相似的API。因为这两个数据结构都实现了字典的行为。
+
+>图是最近连同[EEP 43](http://www.erlang.org/eeps/eep-0043.html)被引入Erlang虚拟机的。
+Erlang 17提供了EEP的部分实现，只支持_一小部分_图功能。
+这意味着图仅在存储不多的键时，图的性能还行。为了解决这个问题，Elixir还提供了[HashDict模块](http://elixir-lang.org/docs/stable/elixir/HashDict.html)该模块提供了一个字典来支持大量的键，并且性能不错。
+
+## 7.3-字典（Dicts）
+Elixir中，关键字列表和图都被乘坐字典。换句话说，一个字典就像一个接口（在Elixir中称之为行为）。
+关键字列表和图模块实现了该接口。
+
+这个接口定义于[Dict模块](http://elixir-lang.org/docs/stable/elixir/Dict.html)，该模块还提供了底层实现的一个API：
+```
+iex> keyword = []
+[]
+iex> map = %{}
+%{}
+iex> Dict.put(keyword, :a, 1)
+[a: 1]
+iex> Dict.put(map, :a, 1)
+%{a: 1}
+```
+
+字典模块允许开发者实现他们自己的字典形式，提供一些特殊的功能，然后联系到现存的的Elixir代码中去。
+字典模块还提供了所有字典类型都可以使用的函数。如，```Dicr.equal?/2```可以比较两个字典类型（可以是不同的实现）。
+
+你会疑惑些程序时用keyword，Map还是Dicr模块呢？答案是：it depends。
+
+如果你的代码期望接受一个关键字作为参数，那么使用keyword模块。如果你想操作一个图，那就使用图模块。
+如果你想你的API对所有字典类型的实现都有用，那就使用字典模块（确保测试一下以所有不同的实现作为参数）。
