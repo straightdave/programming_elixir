@@ -13,7 +13,7 @@ Elixir编程
 [6-二进制-字符串-字符列表](../master/6-bin-str-charlist.md) <br/>
 [7-关键字-图-字典](../master/7-keywords-map-dict.md) <br/>
 [8-模块](../master/8-modules.md) <br/>
-[9-循环](../master/9-recursion.md) <br/>
+[9-递归](../master/9-recursion.md) <br/>
 [10-Enumerable和流](../master/10-enum-stream.md) <br/>
 [11-进程](../master/11-process.md) <br/>
 [12-IO](../master/12-io.md) <br/>
