@@ -34,6 +34,37 @@ false
 
 >你可能会得到与例子中不一样的PID
 
-获取
+用```self/0```函数获取当前进程的PID：
+```
+iex> self()
+#PID<0.41.0>
+iex> Process.alive?(self())
+true
+```
+
+可以发送和接收消息，进程变得越来越有趣。
+
+## 12.2-发送和接收
+使用```send/2```函数发送消息，用```receive/1```接收消息：
+```
+iex> send self(), {:hello, "world"}
+{:hello, "world"}
+iex> receive do
+...>   {:hello, msg}  -> msg
+...>   {:world, msg} -> "won't match"
+...> end
+"world"
+```
+
+当一条消息被发给某进程，该消息被存储在该进程的邮箱里。```receive/1```语句块
+
+
+
+
+
+
+
+
+
 
 
