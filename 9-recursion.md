@@ -1,4 +1,4 @@
-9-循环
+9-递归
 ======
 因为在Elixir中（或所有函数式语言中），数据有不变性（immutability），因此在写循环时与传统的命令式（imperative）语言有所不同。
 例如某命令式语言的循环可以这么写：
@@ -99,7 +99,7 @@ Math.double_each([1, 2, 3]) #=> [2, 4, 6]
 递归和列尾调用优化（tail call optimization）是Elixir中重要的部分，通常用来创建循环。
 尽管如此，在Elixir中你很少会使用以上方式来递归地处理列表。
 
-下一章遥介绍的[Enum模块](http://elixir-lang.org/docs/stable/elixir/Enum.html)为操作列表提供了诸多方便。
+下一章要介绍的[Enum模块](http://elixir-lang.org/docs/stable/elixir/Enum.html)为操作列表提供了诸多方便。
 比如，下面例子：
 ```
 iex> Enum.reduce([1, 2, 3], 0, fn(x, acc) -> x + acc end)
