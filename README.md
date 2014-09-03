@@ -14,7 +14,7 @@ Elixir编程
 [7-关键字-图-字典](../master/7-keywords-map-dict.md) <br/>
 [8-模块](../master/8-modules.md) <br/>
 [9-递归](../master/9-recursion.md) <br/>
-[10-Enumerable和流](../master/10-enum-stream.md) <br/>
+[10-枚举类型和流](../master/10-enum-stream.md) <br/>
 [11-进程](../master/11-process.md) <br/>
 [12-IO](../master/12-io.md) <br/>
 [13-别名-require-import](../master/13-alias-req-imp.md) <br/>
