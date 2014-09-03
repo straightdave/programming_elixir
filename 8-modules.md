@@ -1,11 +1,11 @@
 8-模块
 ======
 
-[编译]() <br/>
-[脚本模式]() <br/>
-[命名函数]() <br/>
-[函数捕捉]() <br/>
-[默认参数]() <br/>
+[编译](#81-%E7%BC%96%E8%AF%91) <br/>
+[脚本模式](#82-%E8%84%9A%E6%9C%AC%E6%A8%A1%E5%BC%8F) <br/>
+[命名函数](#83-%E5%91%BD%E5%90%8D%E5%87%BD%E6%95%B0) <br/>
+[函数捕捉](#84-%E5%87%BD%E6%95%B0%E6%8D%95%E6%8D%89) <br/>
+[默认参数](#85-%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0) <br/>
 
 Elixir中我们把许多函数组织成一个模块。我们在前几章已经提到了许多模块，如[String模块](http://elixir-lang.org/docs/stable/elixir/String.html)：
 ```
@@ -167,7 +167,7 @@ IO.puts Concat.join("Hello", "world")      #=> Hello world
 IO.puts Concat.join("Hello", "world", "_") #=> Hello_world
 ```
 
-任何表达式都可以作为默认参数，但是只在函数调用时**用到了***才被执行（函数定义时，那些表达式只是存在那儿，不执行；函数调用时，没有用到默认值，也不执行）。
+任何表达式都可以作为默认参数，但是只在函数调用时**用到了**才被执行（函数定义时，那些表达式只是存在那儿，不执行；函数调用时，没有用到默认值，也不执行）。
 ```
 defmodule DefaultTest do
   def dowork(x \\ IO.puts "hello") do
