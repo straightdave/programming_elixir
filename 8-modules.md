@@ -117,7 +117,135 @@ Math.zero?([1,2,3])
 如果没有一个子句能匹配参数，会报错。
 
 ## 8.4-函数捕捉
-本教程中提到某函数，都是用```name/arity```的形式描述。
+本教程中提到函数，都是用```name/arity```的形式描述。这种表示方法可以被用来获取一个命名函数（赋给一个函数型变量）。
+下面用iex执行一下上文定义的math.exs文件：
+```
+$ iex math.exs
+```
+
+```
+iex> Math.zero?(0)
+true
+iex> fun = &Math.zero?/1
+&Math.zero?/1
+iex> is_function fun
+true
+iex> fun.(0)
+true
+```
+用```&<function notation>```从函数名捕捉一个函数，它本身代表该函数值（函数类型的值）。
+它可以不必赋给一个变量，直接用括号来使用该函数。
+本地定义的，或者已导入的函数，比如is_function/1，可以不前缀模块名：
+```
+iex> &is_function/1
+&:erlang.is_function/1
+iex> (&is_function/1).(fun)
+true
+```
+
+这种语法还可以作为快捷方式使用与创建函数：
+```
+iex> fun = &(&1 + 1)
+#Function<6.71889879/1 in :erl_eval.expr/5>
+iex> fun.(1)
+2
+```
+
+```&1``` 表示传给该函数的第一个参数。上面例子中，```&(&1+1)```其实等同于```fn x->x+1 end```。
+在创建短小函数时，这个很方便。想要了解更多关于```&```捕捉操作符，参考[Kernel.SpecialForms文档](http://elixir-lang.org/docs/stable/elixir/Kernel.SpecialForms.html)。
+
+## 8.5-默认参数
+Elixir中，命名函数也支持默认参数：
+```
+defmodule Concat do
+  def join(a, b, sep \\ " ") do
+    a <> sep <> b
+  end
+end
+
+IO.puts Concat.join("Hello", "world")      #=> Hello world
+IO.puts Concat.join("Hello", "world", "_") #=> Hello_world
+```
+
+任何表达式都可以作为默认参数，但是只在函数调用时**用到了***才被执行（函数定义时，那些表达式只是存在那儿，不执行；函数调用时，没有用到默认值，也不执行）。
+```
+defmodule DefaultTest do
+  def dowork(x \\ IO.puts "hello") do
+    x
+  end
+end
+```
+
+```
+iex> DefaultTest.dowork 123
+123
+iex> DefaultTest.dowork
+hello
+:ok
+```
+
+如果有默认参数值的函数有了多条子句，推荐先定义一个函数头（无具体函数体）仅为了声明这些默认值：
+```
+defmodule Concat do
+  def join(a, b \\ nil, sep \\ " ")
+
+  def join(a, b, _sep) when nil?(b) do
+    a
+  end
+
+  def join(a, b, sep) do
+    a <> sep <> b
+  end
+end
+
+IO.puts Concat.join("Hello", "world")      #=> Hello world
+IO.puts Concat.join("Hello", "world", "_") #=> Hello_world
+IO.puts Concat.join("Hello")               #=> Hello
+```
+
+使用默认值时，注意对函数重载会有一定影响。考虑下面例子：
+```
+defmodule Concat do
+  def join(a, b) do
+    IO.puts "***First join"
+    a <> b
+  end
+
+  def join(a, b, sep \\ " ") do
+    IO.puts "***Second join"
+    a <> sep <> b
+  end
+end
+```
+
+如果将以上代码保存在文件“concat.ex”中并编译，Elixir会报出以下警告：
+```
+concat.ex:7: this clause cannot match because a previous clause at line 2 always matches
+```
+
+编译器是在警告我们，在使用两个参数调用```join```函数时，总使用第一个函数定义。
+只有使用三个参数调用时，才会使用第二个定义：
+
+```
+$ iex concat.exs
+```
+
+```
+iex> Concat.join "Hello", "world"
+***First join
+"Helloworld"
+iex> Concat.join "Hello", "world", "_"
+***Second join
+"Hello_world"
+```
+
+后面几章将介绍使用命名函数来做循环，如何从别的模块中导入函数，以及模块的属性等。
+
+
+
+
+
+
 
 
 
