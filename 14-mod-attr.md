@@ -127,31 +127,51 @@ Elixir组织中有一个项目，叫做[Plug](https://github.com/elixir-lang/plu
 
 >类似于rack？
 
-Plug库允许开发者定义它们自己的插件
+Plug库允许开发者定义它们自己的plug，可以在一个web服务器上运行：
+```
+defmodule MyPlug do
+  use Plug.Builder
+
+  plug :set_header
+  plug :send_ok
+
+  def set_header(conn, _opts) do
+    put_resp_header(conn, "x-header", "set")
+  end
+
+  def send_ok(conn, _opts) do
+    send(conn, 200, "ok")
+  end
+end
+
+IO.puts "Running MyPlug with Cowboy on http://localhost:4000"
+Plug.Adapters.Cowboy.http MyPlug, []
+```
+
+上面例子我们用了```plug/1```宏来连接各个在处理请求时会被调用的函数。
+在内部，每当你调用```plug/1```时，Plug库把参数存储在@plug属性里。
+在模块被编译之前，Plug执行一个回调函数，这个函数定义了处理http请求的方法。
+这个方法将顺序执行所有保存在@plug属性里的plugs。
+
+为了理解底层的代码，我们需要宏。因此我们将回顾一下元编程手册里这种模式。
+但是这里的焦点是怎样使用属性来存储数据，让开发者得以创建DSL。
+
+另一个例子来自ExUnit框架，它使用模块属性作为注释和存储：
+```
+defmodule MyTest do
+  use ExUnit.Case
+
+  @tag :external
+  test "contacts external service" do
+    # ...
+  end
+end
+```
+
+ExUnit中，@tag标签被用来注释该测试用例。之后，这些标签可以作为过滤测试用例之用。
+例如，你可以避免执行那些被标记成```:external```的测试，因为它们执行起来很慢。
 
 
+本章带你一窥Elixir元编程的冰山一角，讲解了模块属性在开发中是如何扮演关键角色的。
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+下一章将讲解结构体和协议。
