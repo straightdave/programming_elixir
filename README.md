@@ -1,9 +1,27 @@
 Elixir编程
 ==========
+
+Elixir，读作[ɪ'lɪksər]，意思是灵丹妙药、圣水，而它目前的logo就是蓝色水滴。<br/>
+![logo](http://elixir-lang.org/images/logo/logo.png)
+<br/>
+Elixir是一门建立在Erlang虚拟机上的[**函数式语言**](http://baike.baidu.com/view/3476448.htm?fr=aladdin)，支持元编程。
+<br/>
+Elixir是一门动态语言，语法本质上来自Erlang，借鉴了ruby。（设计者Jose Valim本人就是Rails的核心工程师之一，资深ruby程序员）。<br/>
+Elixir目的是将Erlang虚拟机换个面貌呈现给消费者（程序员），使得更多人可以利用Erlang语言以下能力：<br/>
+  - 高并发
+  - 分布式
+  - 高容错性
+  - 可以进行热代码升级，等等 <br/>
+Elixir ~~根本~~ 目的是提高Erlang语法的优美程度，最好弄得像ruby一样。<br/>
+
+2014年8月31日，1.0.0面世在即，目前的稳定版本是0.15.1。
+9月1日临晨，1.0.0rc1发布。
+相信1.0.0正式发布后，Elixir将会得到更大更快的发展。
+
+
 翻译互联网上诸多Elixir资源，以期能够促进自己和他人学习Elixir编程。
 主要资料来源于[Elixir网站](http://elixir-lang.com)。
 如果涉及知产问题，请[联系我](mailto:eyaswoo@163.com)。<br/>
-![logo](http://elixir-lang.org/images/logo/logo.png)
 
 [1-简介](../master/1-intro.md) <br/>
 [2-基本数据类型](../master/2-basic-types.md) <br/>
