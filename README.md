@@ -6,18 +6,18 @@ Elixir编程
 ![logo](http://elixir-lang.org/images/logo/logo.png)
 
 [1-简介](../master/1-intro.md) <br/>
-[2-基本类型](../master/2-basic-types.md) <br/>
+[2-基本数据类型](../master/2-basic-types.md) <br/>
 [3-基本运算符](../master/3-basic-ops.md) <br/>
 [4-模式匹配](../master/4-pattern-matching.md) <br/>
 [5-流程控制](../master/5-case-cond-if.md) <br/>
 [6-二进制-字符串-字符列表](../master/6-bin-str-charlist.md) <br/>
-[7-关键字-图-字典](../master/7-keywords-map-dict.md) <br/>
+[7-键值-图-字典](../master/7-keywords-map-dict.md) <br/>
 [8-模块](../master/8-modules.md) <br/>
 [9-递归](../master/9-recursion.md) <br/>
 [10-枚举类型和流](../master/10-enum-stream.md) <br/>
 [11-进程](../master/11-process.md) <br/>
 [12-IO](../master/12-io.md) <br/>
-[13-别名-require-import](../master/13-alias-req-imp.md) <br/>
+[13-别名和程序导入](../master/13-alias-req-imp.md) <br/>
 [14-模块属性](../master/14-mod-attr.md) <br/>
 [15-结构体](../master/15-structs.md) <br/>
 [16-协议](../master/16-proto.md) <br/>
