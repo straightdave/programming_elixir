@@ -1,5 +1,13 @@
 1-简介
 ======
+[安装程序](#11) <br/>
+[其它平台](#12-%E5%85%B6%E5%AE%83%E5%B9%B3%E5%8F%B0) <br/>
+[使用预编译包](#13-%E4%BD%BF%E7%94%A8%E9%A2%84%E7%BC%96%E8%AF%91%E5%8C%85) <br/>
+[从源码编译安装](#14-%E4%BB%8E%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85) <br/>
+[安装Erlang](#15-%E5%AE%89%E8%A3%85erlang) <br/>
+[交互模式](#16-%E4%BA%A4%E4%BA%92%E6%A8%A1%E5%BC%8F) <br/>
+[执行脚本](#17-%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC) <br/>
+
 欢迎！
 
 本教程旨在向你展示如何开始的Elixir之旅。本章将涵盖如何安装，如何学习使用交互式Elixir Shell（称为IEx）。
@@ -10,7 +18,7 @@
 
 开始吧！
 
-## 1.1-安装器
+## 1.1-安装程序
 Elixir为Windows平台提供了安装程序（Installer）：
 Windows Installer：[Here](http://s3.hex.pm/elixir-websetup.exe) <br/>
 该安装程序包括了最新版本的Elixir和Erlang。
