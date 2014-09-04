@@ -52,4 +52,48 @@ end
 我们可以为所有内建数据类型实现协议：
   - 原子
   - BitString
+  - 浮点型
+  - 函数
+  - 整型
+  - 列表
+  - 图
+  - PID
+  - Port
+  - 引用
+  - 元祖
+
+现在手边有了一个定义并被实现的协议，如此使用之：
+```
+iex> Blank.blank?(0)
+false
+iex> Blank.blank?([])
+true
+iex> Blank.blank?([1, 2, 3])
+false
+```
+
+给它传递一个并没有实现该协议的数据类型，会导致报错：
+```
+iex> Blank.blank?("hello")
+** (Protocol.UndefinedError) protocol Blank not implemented for "hello"
+```
+
+## 16.1-协议和结构体
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
