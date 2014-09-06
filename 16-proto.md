@@ -1,7 +1,7 @@
 16-协议
 ========
 [协议和结构体]()<br/>
-[回归大众化]()<br/>
+[回归大众]()<br/>
 [内建协议]()<br/>
 
 协议是实现Elixir多态性的重要机制。任何数据类型只要实现了某协议，那么该协议的分发就是可用的。
@@ -79,7 +79,108 @@ iex> Blank.blank?("hello")
 ```
 
 ## 16.1-协议和结构体
+协议和结构体一起使用能够大大加强Elixir的可扩展性。<br/>
 
+在前面几章中我们知道，尽管结构体就是图，但是它们和图并不共享各自协议的实现。
+像前几章一样，我们先定义一个名为```User```的结构体：
+```
+iex> defmodule User do
+...>   defstruct name: "john", age: 27
+...> end
+{:module, User,
+ <<70, 79, 82, ...>>, {:__struct__, 0}}
+ ```
+ 然后看看：
+ ```
+iex> Blank.blank?(%{})
+true
+iex> Blank.blank?(%User{})
+** (Protocol.UndefinedError) protocol Blank not implemented for %User{age: 27, name: "john"}
+```
+
+结构体没有使用协议针对图的实现，而是使用它自己的协议实现：
+```
+defimpl Blank, for: User do
+  def blank?(_), do: false
+end
+```
+
+如果愿意，你可以定义你自己的语法来检查一个user为不为空。
+不光如此，你还可以使用结构体创建更强健的数据类型，比如队列，然后实现所有相关的协议，比如枚举（Enumerable）或检查是否为空。
+
+有些时候，程序员们希望给结构体提供某些默认的协议实现。因为显式给所有结构体都实现某些协议实在是太枯燥了。
+这引出了下一节“回归大众”（falling back to any）的说法。
+
+## 16.2-回归大众
+能够给所有类型提供默认的协议实现肯定是很方便的。在定义协议时，把```@fallback_to_any```设置为```true```即可：
+```
+defprotocol Blank do
+  @fallback_to_any true
+  def blank?(data)
+end
+```
+现在这个协议可以被这么实现：
+```
+defimpl Blank, for: Any do
+  def blank?(_), do: false
+end
+```
+
+现在，那些我们还没有实现```Blank```协议的数据类型（包括结构体）也可以来判断是否为空了。
+
+## 16.3-内建协议
+Elixir自带了一些内建协议。在前面几章中我们讨论过枚举模块，它提供了许多方法。
+只要任何一种数据结构它实现了Enumerable协议，就能使用这些方法：
+
+```
+iex> Enum.map [1, 2, 3], fn(x) -> x * 2 end
+[2,4,6]
+iex> Enum.reduce 1..3, 0, fn(x, acc) -> x + acc end
+6
+```
+
+另一个例子是```String.Chars```协议，它规定了如何将包含字符的数据结构转换为字符串类型。
+它暴露为函数```to_string```：
+```
+iex> to_string :hello
+"hello"
+```
+
+注意，在Elixir中，字符串插值操作调用的是```to_string```函数：
+```
+iex> "age: #{25}"
+"age: 25"
+```
+上面代码能工作是因为数字类型实现了```String.Chars```协议。如果传进去的是元组就会报错：
+```
+iex> tuple = {1, 2, 3}
+{1, 2, 3}
+iex> "tuple: #{tuple}"
+** (Protocol.UndefinedError) protocol String.Chars not implemented for {1, 2, 3}
+```
+
+当想要打印一个比较复杂的数据结构时，可以使用```inspect```函数。该函数基于协议```Inspect```：
+```
+iex> "tuple: #{inspect tuple}"
+"tuple: {1, 2, 3}"
+```
+
+_Inspect_协议用来将任意数据类型转换为可读的文字表述。IEx用来打印表达式结果用的就是它：
+```
+iex> {1, 2, 3}
+{1,2,3}
+iex> %User{}
+%User{name: "john", age: 27}
+```
+
+记住，习惯上来说，无论何时，头顶#号被插的值，会被表现成一个不合语法的字符串。
+在转换为可读的字符串时丢失了信息，因此别指望还能从该字符串取回原来的那个对象：
+```
+iex> inspect &(&1+2)
+"#Function<6.71889879/1 in :erl_eval.expr/5>"
+```
+
+Elixir中还有些其它协议，但本章就讲这几个比较常用的。下一章将讲讲Elixir中的错误捕捉以及异常。
 
 
 
