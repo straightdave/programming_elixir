@@ -1,10 +1,10 @@
 17-异常处理
 ===========
-[Errors]()<br/>
-[Throws]()<br/>
-[Exits]()<br/>
-[After]()<br/>
-[变量作用域]()<br/>
+[Errors](#171-errors)<br/>
+[Throws](#172-throws)<br/>
+[Exits](#173-exits)<br/>
+[After](#174-after)<br/>
+[变量作用域](#175-%E5%8F%98%E9%87%8F%E4%BD%9C%E7%94%A8%E5%9F%9F)<br/>
 
 Elixir有三种错误机制：errors，throws和exits。本章我们将逐个讲解它们，包括在何时使用哪一个。
 
