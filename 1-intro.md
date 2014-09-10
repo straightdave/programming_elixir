@@ -48,6 +48,9 @@ Elixir可以工作在以下系统平台上：
 <br/>
 以上方法都应该会自动安装Erlang.如果没有，请参考[1.5-安装Erlang](#15-%E5%AE%89%E8%A3%85erlang)。<br/>
 
+Ubuntu用户：
+  - 最方便的方法就是安装Erlang后，下载与编译包。解压并且export PATH。
+
 ## 1.3-使用预编译包
 如果想尝鲜，Elixir为每一个release提供了预编译包（编译好并打包的程序，开箱即用）。<br/>
 首先[安装Erlang](http://elixir-lang.org/getting_started/1.html#1.5-installing-erlang)，然后在[这里](https://github.com/elixir-lang/elixir/releases/)下载最新的预编译包（Precompiled.zip），开zip，即可使用elixir和iex了。<br/>
