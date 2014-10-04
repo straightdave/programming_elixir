@@ -36,6 +36,6 @@ Elixir是一门建立在Erlang虚拟机上的[**函数式语言**](http://baike.
 [15-结构体](../master/15-structs.md) <br/>
 [16-协议](../master/16-proto.md) <br/>
 [17-异常处理](../master/17-try-catch.md) <br/>
-[18-领悟](../master/18-comprehensions.md) <br/>
+[18-列表速构](../master/18-comprehensions.md) <br/>
 [19-魔法印](../master/19-sigils.md) <br/>
 [20-下一步](../master/20-next.md) <br/>
