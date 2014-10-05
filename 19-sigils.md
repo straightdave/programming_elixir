@@ -95,7 +95,7 @@ iex> ~S(String without escape codes and without #{interpolation})
 "String without escape codes and without \#{interpolation}"
 ```
 
-字符串和字符列表支持一下转义字符：
+字符串和字符列表支持以下转义字符：
   - \" 表示一个双引号
   - \' 表示一个单引号
   - \\ 表示一个反斜杠
