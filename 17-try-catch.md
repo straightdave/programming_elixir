@@ -160,4 +160,4 @@ iex> from_after
 
 至此我们结束了对```try/catch/rescue```等知识的介绍。你会发现其实这些概念在实际的Elixir编程中不太常用。尽管的确有时也会用到。
 
-是时候讨论一些Elixir的概念如理解（comprehensions）和魔法印（sigils）了。
+是时候讨论一些Elixir的概念，如列表速构（comprehensions）和魔法印（sigils）了。
