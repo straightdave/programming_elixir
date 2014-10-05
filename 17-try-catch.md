@@ -6,7 +6,7 @@
 [After](#174-after)<br/>
 [变量作用域](#175-%E5%8F%98%E9%87%8F%E4%BD%9C%E7%94%A8%E5%9F%9F)<br/>
 
-Elixir有三种错误机制：errors，throws和exits。本章我们将逐个讲解它们，包括在何时使用哪一个。
+Elixir有三种错误处理机制：errors，throws和exits。本章我们将逐个讲解它们，包括应该在何时使用哪一个。
 
 ## 17.1-Errors
 举个例子，尝试让原子加上一个数字，就会激发一个错误（errors）：
@@ -28,7 +28,7 @@ iex> raise ArgumentError, message: "invalid argument foo"
 ** (ArgumentError) invalid argument foo
 ```
 
-你好可以使用```defexception/2```定义你自己的错误。最常见的是定义一个有消息说明的错误：
+你可以使用```defexception/2```定义你自己的错误。最常见的是定义一个有消息说明的错误：
 ```
 iex> defexception MyError, message: "default message"
 iex> raise MyError
@@ -59,18 +59,16 @@ iex> File.read "hello"
 ```
 这个例子中没有```try/rescue```。如果你想处理打开文件可能的不同结果，你可以使用case来匹配：
 ```
-iex> File.read "hello"
-{:error, :enoent}
-iex> File.write "hello", "world"
-:ok
-iex> File.read "hello"
-{:ok, "world"}
+iex> case File.read "hello" do
+...>   {:ok, body} -> IO.puts "got ok"
+...>   {:error, body} -> IO.puts "got error"
+...> end
 ```
 使用这个匹配处理，你可以自己决定要不要把问题抛出来。
 这就是为什么Elixir不让```File.read/1```等函数自己抛出异常。它把决定权留给程序员，让他们寻找最合适的处理方法。
 
 
-如果你真的期待文件存在（打开文件时文件不存在确实是一个错误），你可以简单地使用```File.read!/1```：
+如果你真的期待文件存在（_打开文件时文件不存在_这确实是一个错误），你可以简单地使用```File.read!/1```：
 ```
 iex> File.read! "unknown"
 ** (File.Error) could not read file unknown: no such file or directory
@@ -78,7 +76,7 @@ iex> File.read! "unknown"
 ```
 
 换句话说，我们避免使用```try/rescue```是因为我们**不用错误处理来控制程序执行流程**。
-在Elixir中，我们视错误为其字面意思：它们之不说是用来表示意外或异常信息。
+在Elixir中，我们视错误为其字面意思：它们只不过是用来表示意外或异常的信息。  
 如果你真的希望改变执行过程，你可以使用```throws```。
 
 ## 17.2-Throws
@@ -163,25 +161,3 @@ iex> from_after
 至此我们结束了对```try/catch/rescue```等知识的介绍。你会发现其实这些概念在实际的Elixir编程中不太常用。尽管的确有时也会用到。
 
 是时候讨论一些Elixir的概念如理解（comprehensions）和魔法印（sigils）了。
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
