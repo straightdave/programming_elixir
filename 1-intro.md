@@ -9,6 +9,8 @@
 [执行脚本](#17-%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC) <br/>
 
 欢迎！
+>老实说吧，推荐边看Elixir入门，边看Erlang/OTP的资料。因为Elixir只是一门编程语言，其精华还是在于开发基于OTP的应用。
+Elixir是为了改进Erlang晦涩的语法，使之变得像Ruby那么美观。
 
 本教程旨在向你展示如何开始的Elixir之旅。本章将涵盖如何安装，如何学习使用交互式Elixir Shell（称为IEx）。
 
