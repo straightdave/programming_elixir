@@ -1,7 +1,7 @@
 Elixir编程
 ==========
 
-Elixir，[ɪ'lɪksər]，意思是灵丹妙药、圣水。它的logo是一枚蓝色水滴：<br />
+Elixir，[ɪ'lɪksər]，意思是灵丹妙药、圣水。它的logo是一枚紫色水滴：<br />
 ![logo](http://elixir-lang.org/images/logo/logo.png)
 <br/>
 Elixir是一门建立在Erlang虚拟机上的[**函数式语言**](http://baike.baidu.com/view/3476448.htm?fr=aladdin)，支持元编程。有人说，Elixir就是函数式的ruby语言，也有人说Elixir是语法优美的Erlang。
