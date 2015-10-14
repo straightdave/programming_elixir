@@ -7,11 +7,11 @@ Elixir，[ɪ'lɪksər]，意思是灵丹妙药、圣水。它的logo是一枚紫
 Elixir是一门建立在Erlang虚拟机上的[**函数式语言**](http://baike.baidu.com/view/3476448.htm?fr=aladdin)，支持元编程。有人说，Elixir就是函数式的ruby语言，也有人说Elixir是语法优美的Erlang。
 <br/>
 
-2014年8月31日，1.0.0面世在即，目前的稳定版本是0.15.1。<br/>
-9月1日临晨，1.0.0rc1发布。<br/>
-9月7日晚，1.0.0rc2发布。v1.0.0已准备发布。<br/>
-9月10日，1.0.0正式发布。可以在[这里](https://github.com/elixir-lang/elixir/releases/)下载预编译包。
-
+2014年8月31日，1.0.0发布<br/>
+9月1日临晨，1.0.0rc1发布<br/>
+9月7日晚，1.0.0rc2发布<br/>
+9月10日，1.0.0正式发布<br/>
+2015年9月28日，[1.1发布](http://elixir-lang.org/blog/2015/09/28/elixir-v1-1-0-released/)
 
 翻译互联网上诸多Elixir资源，以期能够促进自己和大家学习和推广Elixir编程。
 主要资料来源于[Elixir网站](http://elixir-lang.com)。
