@@ -54,10 +54,10 @@ iex> for n <- 1..4, Integer.odd?(n), do: n * n
 不但如此，速构还接受多个生成器和过滤器。下面就是一个例子，代码接受目录列表，删除这些目录下的所有文件：
 ```
 for dir  <- dirs,
-    file <- File.ls!(dir),
-    path = Path.join(dir, file),
-    File.regular?(path) do
-      File.rm!(path)
+  file <- File.ls!(dir),
+  path = Path.join(dir, file),
+  File.regular?(path) do
+    File.rm!(path)
 end
 ```
 
