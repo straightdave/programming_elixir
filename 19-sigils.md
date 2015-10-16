@@ -169,7 +169,7 @@ iex> defmodule MySigils do
 ...>   def sigil_i(string, []), do: String.to_integer(string)
 ...> end
 iex> import MySigils
-iex> ~i(13)
+iex> ~i("13")
 13
 ```
 魔法印通过宏，可以用来做一些发生在*编译时*的工作。例如，正则表达式在编译时会被编译，而在执行的时候就不必再被编译了。
