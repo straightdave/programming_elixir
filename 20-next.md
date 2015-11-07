@@ -20,7 +20,9 @@ mix new path/to/new/project
 [Blog](http://elixir-lang.org/blog/) <br/>
 [文档](http://elixir-lang.org/docs.html)  <br/>
 
-## 20.3-Erlang一瞥
+# Seriously, please check out my next works about [advanced Elixir programming](https://github.com/straightdave/elixir_adv) !
+请看拙作《高级Elixir编程》.名字随便起的，主要是Elixir编程一些进阶的知识。翻译、整理自官网或者自己理解等。
+https://github.com/straightdave/elixir_adv
 
 
 
