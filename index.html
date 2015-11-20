@@ -1,69 +1,82 @@
 <!doctype html>
-<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
-<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Elixir编程 by straightdave</title>
 
-  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen">
-  <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <script type="text/javascript" src="javascripts/script.js"></script>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Elixir编程</h1>
+        <p>Elixir语言入门</p>
 
-  <title>Elixir编程</title>
-  <meta name="description" content="Elixir语言及函数式编程">
+        <p class="view"><a href="https://github.com/straightdave/programming_elixir">View the Project on GitHub <small>straightdave/programming_elixir</small></a></p>
 
-  <meta name="viewport" content="width=device-width,initial-scale=1">
 
-</head>
+        <ul>
+          <li><a href="https://github.com/straightdave/programming_elixir/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/straightdave/programming_elixir/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/straightdave/programming_elixir">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="elixir编程入门" class="anchor" href="#elixir%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8" aria-hidden="true"><span class="octicon octicon-link"></span></a>Elixir编程入门</h1>
 
-<body>
+<p>Elixir，[ɪ'lɪksər]，意为灵丹妙药、圣水，logo是一枚紫色水滴：<br>
+<img src="http://elixir-lang.org/images/logo/logo.png" alt="logo">
+<br>
+Elixir是一门建立在Erlang虚拟机上的<a href="http://baike.baidu.com/view/3476448.htm?fr=aladdin"><strong>函数式语言</strong></a>，支持元编程，创始人Valim是ruby界的知名人士。私以为，可以把Elixir看作函数式的ruby语言，或者语法改良的Erlang。Elixir受瞩目的原因，是因为它结合了Erlang作为系统编程语言的各种优秀特点，以及类似ruby的语法（Erlang语法比较晦涩）。
+<br></p>
 
-  <div class="wrapper">
-    <header>
-      <h1 class="title">Elixir编程</h1>
-    </header>
-    <div id="container">
-      <p class="tagline">Elixir语言及函数式编程</p>
-      <div id="main" role="main">
-        <div class="download-bar">
-        <div class="inner">
-          <a href="https://github.com/straightdave/programming-elixir/tarball/master" class="download-button tar"><span>Download</span></a>
-          <a href="https://github.com/straightdave/programming-elixir/zipball/master" class="download-button zip"><span>Download</span></a>
-          <a href="https://github.com/straightdave/programming-elixir" class="code">View Elixir编程 on GitHub</a>
-        </div>
-        <span class="blc"></span><span class="trc"></span>
-        </div>
-        <article class="markdown-body">
-          <h1>
-<a name="elixir%E7%BC%96%E7%A8%8B" class="anchor" href="#elixir%E7%BC%96%E7%A8%8B"><span class="octicon octicon-link"></span></a>Elixir编程</h1>
+<p>Elixir还是一门初出茅庐的语言：   <br>
+2014年8月31日，1.0.0发布<br>
+2014年9月1日临晨，1.0.0rc1发布<br>
+2014年9月7日晚，1.0.0rc2发布<br>
+2014年9月10日，1.0.0正式发布<br>
+2015年9月28日，<a href="http://elixir-lang.org/blog/2015/09/28/elixir-v1-1-0-released/">1.1发布</a></p>
 
-<p>翻译互联网上诸多Elixir资源，以期能够促进自己和他人学习Elixir编程。
-主要资料来源于<a href="http://elixir-lang.com">Elixir网站</a>。
-如果涉及知产问题，请<a href="mailto:eyaswoo@163.com">联系我</a>。<br><img src="http://elixir-lang.org/images/logo/logo.png" alt="logo"></p>
+<p>翻译互联网上诸多Elixir资源，以期能够促进自己和大家学习和推广Elixir编程<br>
+主要资料来源于<a href="http://elixir-lang.com">Elixir网站</a><br>
+如有问题，请<a href="mailto:eyaswoo@163.com">联系我</a><br></p>
 
-<p><a href="../master/1-intro.md">1-简介</a> <br><a href="../master/2-basic-types.md">2-基本类型</a> <br></p>
-        </article>
-      </div>
+<p><strong>基本教程</strong></p>
+
+<p><a href="../master/1-intro.md">1-简介</a> <br>
+<a href="../master/2-basic-types.md">2-基本数据类型</a> <br>
+<a href="../master/3-basic-ops.md">3-基本运算符</a> <br>
+<a href="../master/4-pattern-matching.md">4-模式匹配</a> <br>
+<a href="../master/5-case-cond-if.md">5-流程控制</a> <br>
+<a href="../master/6-bin-str-charlist.md">6-二进制-字符串-字符列表</a> <br>
+<a href="../master/7-keywords-map-dict.md">7-键值-图-字典</a> <br>
+<a href="../master/8-modules.md">8-模块</a> <br>
+<a href="../master/9-recursion.md">9-递归</a> <br>
+<a href="../master/10-enum-stream.md">10-枚举类型和流</a> <br>
+<a href="../master/11-process.md">11-进程</a> <br>
+<a href="../master/12-io.md">12-IO</a> <br>
+<a href="../master/13-alias-req-imp.md">13-别名和程序导入</a> <br>
+<a href="../master/14-mod-attr.md">14-模块属性</a> <br>
+<a href="../master/15-structs.md">15-结构体</a> <br>
+<a href="../master/16-proto.md">16-协议</a> <br>
+<a href="../master/17-try-catch.md">17-异常处理</a> <br>
+<a href="../master/18-comprehensions.md">18-列表速构</a> <br>
+<a href="../master/19-sigils.md">19-魔法印</a> <br>
+<a href="../master/20-next.md">20-下一步</a> <br></p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/straightdave">straightdave</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
     </div>
-    <footer>
-      <div class="owner">
-      <p><a href="https://github.com/straightdave" class="avatar"><img src="https://avatars3.githubusercontent.com/u/5617748?v=2&amp;s=60" width="48" height="48"></a> <a href="https://github.com/straightdave">straightdave</a> maintains <a href="https://github.com/straightdave/programming-elixir">Elixir编程</a></p>
-
-
-      </div>
-      <div class="creds">
-        <small>This page generated using <a href="http://pages.github.com/">GitHub Pages</a><br>theme by <a href="https://twitter.com/jonrohan/">Jon Rohan</a></small>
-      </div>
-    </footer>
-  </div>
-  <div class="current-section">
-    <a href="#top">Scroll to top</a>
-    <a href="https://github.com/straightdave/programming-elixir/tarball/master" class="tar">tar</a><a href="https://github.com/straightdave/programming-elixir/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
-    <p class="name"></p>
-  </div>
-
-  
-</body>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
 </html>
