@@ -52,7 +52,7 @@ true
 iex> send self(), {:hello, "world"}
 {:hello, "world"}
 iex> receive do
-...>   {:hello, msg}  -> msg
+...>   {:hello, msg} -> msg
 ...>   {:world, msg} -> "won't match"
 ...> end
 "world"
@@ -65,7 +65,7 @@ iex> receive do
 如果找不到匹配的消息，当前进程将一直等待，知道下一条信息到达。但是可以设置一个超时时间：
 ```elixir
 iex> receive do
-...>   {:hello, msg}  -> msg
+...>   {:hello, msg} -> msg
 ...> after
 ...>   1_000 -> "nothing after 1s"
 ...> end
@@ -98,14 +98,14 @@ iex> flush()
 ## 11.3-链接
 Elixir中最常用的进程派生方式是通过函数```spawn_link/1```。
 在举例子讲解```spawn_link/1```之前，来看看如果一个进程失败了会发生什么：
-```
+```elixir
 iex> spawn fn -> raise "oops" end
 #PID<0.58.0>
 ```
 
 。。。啥也没发生。这时因为进程都是互不干扰的。如果我们希望一个进程中发生失败可以被另一个进程知道，我们需要链接它们。
 使用```spawn_link/1```函数，例子：
-```
+```elixir
 iex> spawn_link fn -> raise "oops" end
 #PID<0.60.0>
 ** (EXIT from #PID<0.41.0>) an exception was raised:
@@ -115,7 +115,7 @@ iex> spawn_link fn -> raise "oops" end
 
 当失败发生在shell中，shell会自动终止执行，并显示失败信息。这导致我们没法看清背后过程。
 要弄明白链接的进程在失败时发生了什么，我们在一个脚本文件使用```spawn_link/1```并且执行和观察它：
-```
+```elixir
 # spawn.exs
 spawn_link fn -> raise "oops" end
 
@@ -131,13 +131,13 @@ end
 进程和链接在创建能高容错系统时扮演重要角色。在Elixir程序中，我们经常把进程链接到某“管理者”上。
 由这个角色负责检测失败进程，并且创建新进程取代之。因为进程间独立，默认情况下不共享任何东西。
 而且当一个进程失败了，也不会影响其它进程。
-因此这种形式（进程链接到“管理者”角色）是唯一的实现方法。
-<br/>
+因此这种形式（进程链接到“管理者”角色）是唯一的实现方法。   
+
 
 其它语言通常需要我们来try-catch异常，而在Elixir中我们对此无所谓，放手任进程挂掉。
 因为我们希望“管理者”会以更合适的方式重启系统。
-“要死你就快一点”是Elixir软件开发的通用哲学。
-<br/>
+“要死你就快一点”是Elixir软件开发的通用哲学。   
+
 
 在讲下一章之前，让我们来看一个Elixir中常见的创建进程的情形。
 
@@ -149,7 +149,7 @@ end
 
 进程就是（最常见的）答案。我们可以写无限循环的进程，保存一个状态，然后通过收发信息来告知或改变该状态。
 例如，写一个模块文件，用来创建一个提供k-v仓储服务的进程：
-```
+```elixir
 defmodule KV do
   def start do
     {:ok, spawn_link(fn -> loop(%{}) end)}
@@ -173,7 +173,7 @@ end
 当受到```:put```消息，它便用一个新版本的图变量（里面的k-v更新了）再次调用自身。
 
 执行一下试试：
-```
+```elixir
 iex> {:ok, pid} = KV.start
 #PID<0.62.0>
 iex> send pid, {:get, :hello, self()}
@@ -184,7 +184,7 @@ nil
 
 一开始进程内的图变量是没有键值的，所以发送一个```:get```消息并且刷新当前进程的收件箱，返回nil。
 下面再试试发送一个```:put```消息：
-```
+```elixir
 iex> send pid, {:put, :hello, :world}
 #PID<0.62.0>
 iex> send pid, {:get, :hello, self()}
@@ -197,7 +197,7 @@ iex> flush
 事实上，任何进程只要知道该进程的PID，都能读取和修改状态。
 
 还可以注册这个PID，给它一个名称。这使得人人都知道它的名字，并通过名字来向它发送消息：
-```
+```elixir
 iex> Process.register(pid, :kv)
 true
 iex> send :kv, {:get, :hello, self()}
@@ -209,7 +209,7 @@ iex> flush
 使用进程维护状态，以及注册进程都是Elixir程序非常常用的方式。
 但是大多数时间我们不会自己实现，而是使用Elixir提供的抽象实现。
 例如，Elixir提供的[agent](http://elixir-lang.org/docs/stable/elixir/Agent.html)就是一种维护状态的简单的抽象实现：
-```
+```elixir
 iex> {:ok, pid} = Agent.start_link(fn -> %{} end)
 {:ok, #PID<0.72.0>}
 iex> Agent.update(pid, fn map -> Map.put(map, :hello, :world) end)
@@ -222,4 +222,3 @@ iex> Agent.get(pid, fn map -> Map.get(map, :hello) end)
 除了agents，Elixir还提供了创建通用服务器（generic servers，称作GenServer）、
 通用时间管理器以及事件处理器（又称GenEvent）的API。
 这些，连同“管理者”树，都可以在Mix和OTP手册里找到详细说明。
-
