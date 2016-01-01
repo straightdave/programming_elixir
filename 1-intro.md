@@ -17,13 +17,13 @@ Elixir是为了改进Erlang晦涩的语法，使之变得像Ruby那么美观，�
 使用本教程的需求：
   - Erlang - V17.0或更高
   - Elixir - V0.15.0或更高
-<br/>
+
 开始吧！
 
 ## 1.1-安装程序
 Elixir为Windows平台提供了安装程序（Installer）：
-  - Windows Installer：[Here](http://s3.hex.pm/elixir-websetup.exe) 
-<br/>
+  - Windows Installer：[Here](http://s3.hex.pm/elixir-websetup.exe)
+
 该安装程序包括了最新版本的Elixir和Erlang。
 
 ## 1.2-其它平台
@@ -47,30 +47,34 @@ Elixir可以工作在以下系统平台上：
   - FreeBSD
     - 使用ports: cd /usr/ports/lang/elixir && make install clean
     - 或使用pkg: pkg install elixir
-<br/>
-以上方法都应该会自动安装Erlang.如果没有，请参考[1.5-安装Erlang](#15-%E5%AE%89%E8%A3%85erlang)。<br/>
+
+以上方法都应该会自动安装Erlang。
+如果没有，请参考[1.5-安装Erlang](#15-%E5%AE%89%E8%A3%85erlang)。   
 
 Ubuntu用户：
   - 最方便的方法就是安装Erlang后，下载与编译包。解压并且export PATH。
 
 ## 1.3-使用预编译包
-如果想尝鲜，Elixir为每一个release提供了预编译包（编译好并打包的程序，开箱即用）。<br/>
-首先[安装Erlang](http://elixir-lang.org/getting_started/1.html#1.5-installing-erlang)，然后在[这里](https://github.com/elixir-lang/elixir/releases/)下载最新的预编译包（Precompiled.zip），开zip，即可使用elixir和iex了。<br/>
+如果想尝鲜，Elixir为每一个release提供了预编译包（编译好并打包的程序，开箱即用）。   
+首先[安装Erlang](http://elixir-lang.org/getting_started/1.html#1.5-installing-erlang)，
+然后在[这里](https://github.com/elixir-lang/elixir/releases/)下载最新的
+预编译包（Precompiled.zip），开zip，即可使用elixir和iex了。   
 当然为了方便起见，可将这些可执行文件的路径加入环境变量。
 
 ## 1.4-从源码编译安装
 首先[安装Erlang](http://elixir-lang.org/getting_started/1.html#1.5-installing-erlang)，
-然后在[这里](https://github.com/elixir-lang/elixir/releases/)下载最新的源码，自己使用make工具编译安装。
+然后在[这里](https://github.com/elixir-lang/elixir/releases/)下载最新的源码，
+自己使用make工具编译安装。
 
 >在Windows上编译安装请参考https://github.com/elixir-lang/elixir/wiki/Windows
 
 >附上加环境变量的命令
-```
+```sh
 $ export PATH="$PATH:/path/to/elixir/bin"
 ```
 
 >如果你十分激进，可以直接选择编译安装github上的master分支：
-```
+```sh
 $ git clone https://github.com/elixir-lang/elixir.git
 $ cd elixir
 $ make clean test
@@ -78,22 +82,27 @@ $ make clean test
 如果测试无法通过，可在[repo](https://github.com/elixir-lang/elixir)的Issue里汇报。
 
 ## 1.5-安装Erlang
-安装Elixir唯一的要求就是Erlang（V17.0+），它可以很容易地使用[预编译包](https://www.erlang-solutions.com/downloads/download-erlang-otp)安装。
-如果你想从源码安装，可以去[Erlang网站](http://www.erlang.org/download.html)找找，参考[Riak文档](http://docs.basho.com/riak/1.3.0/tutorials/installation/Installing-Erlang/)。<br/>
+安装Elixir唯一的要求就是Erlang（V17.0+），
+它可以很容易地使用
+[预编译包](https://www.erlang-solutions.com/downloads/download-erlang-otp)安装。
+如果你想从源码安装，可以去[Erlang网站](http://www.erlang.org/download.html)找找，
+参考[Riak文档](http://docs.basho.com/riak/1.3.0/tutorials/installation/Installing-Erlang/)。   
 安装好Erlang后，打开命令行（或命令窗口），输入```erl```，可以输出Erlang的版本信息：
 ```
 Erlang/OTP 17 (erts-6) [64-bit] [smp:2:2] [async-threads:0] [hipe] [kernel-poll:false]
 ```
->安装好Erlang后，你需要手动添加环境变量或$PATH。关于环境变量，参考[这里](http://en.wikipedia.org/wiki/Environment_variable)。
+>安装好Erlang后，你需要手动添加环境变量或$PATH。
+关于环境变量，参考[这里](http://en.wikipedia.org/wiki/Environment_variable)。
 
 
 ## 1.6-交互模式
 安装好Elixir之后，你有了三个可执行文件：```iex```，```elixir```和```elixirc```。
-如果你是用预编译包方式安装的，可以在解压后的bin目录下找到它们。  <br/>
+如果你是用预编译包方式安装的，可以在解压后的bin目录下找到它们。    
+
 现在我们可以从```iex```开始了（或者是```iex.bat```，如果在Windows上）。
 交互模式，就是可以向其中输入任何Elixir表达式或命令，然后直接看到表达式或命令的结果。
 如以下所示：
-```
+```elixir
 Interactive Elixir - press Ctrl+C to exit (type h() ENTER for help)
 
 iex> 40 + 2
@@ -105,7 +114,7 @@ iex> "hello" <> " world"
 
 ## 1.7-执行脚本
 把表达式写进脚本文件，可以用```elixir```命令执行它。如：
-```
+```sh
 $ cat simple.exs
 IO.puts "Hello world
 from Elixir"
@@ -115,4 +124,4 @@ Hello world
 from Elixir
 ```
 
-在以后的章节中，我们还会介绍如何编译Elixir程序，以及使用Mix这样的build工具。
+在以后的章节中，我们还会介绍如何编译Elixir程序，以及使用Mix这样的构建工具。
