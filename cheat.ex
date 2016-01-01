@@ -1,1 +1,1 @@
-# to cheat github pretending to use Elixir
+# Github会以为本repo是elixir 100%
