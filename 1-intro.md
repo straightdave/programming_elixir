@@ -1,68 +1,80 @@
 1-简介
 ======
-[安装程序](#11-%E5%AE%89%E8%A3%85%E7%A8%8B%E5%BA%8F) <br/>
-[其它平台](#12-%E5%85%B6%E5%AE%83%E5%B9%B3%E5%8F%B0) <br/>
-[使用预编译包](#13-%E4%BD%BF%E7%94%A8%E9%A2%84%E7%BC%96%E8%AF%91%E5%8C%85) <br/>
-[从源码编译安装](#14-%E4%BB%8E%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85) <br/>
-[安装Erlang](#15-%E5%AE%89%E8%A3%85erlang) <br/>
-[交互模式](#16-%E4%BA%A4%E4%BA%92%E6%A8%A1%E5%BC%8F) <br/>
-[执行脚本](#17-%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC) <br/>
+[安装包](#)
+[其它平台](#)    
+[使用预编译包](#)    
+[从源码编译安装](#)   
+[安装Erlang](#)    
+[交互模式](#)    
+[执行脚本](#)    
 
-欢迎！
->本文属于Elixir语法入门教程。推荐边看入门，边看Erlang/OTP的资料。因为Elixir只是一门编程语言，精华是在用其于开发基于OTP的应用。   
-Elixir是为了改进Erlang晦涩的语法，使之变得像Ruby那么美观，让人们可以更方便地利用OTP开发高度稳定和容错的应用。
+欢迎！   
 
-本章将涵盖如何安装，如何学习使用交互式Elixir Shell（称为IEx）。
+>本文是Elixir的入门教程，主要介绍Elixir的语法。
+语言本身纵有万种好，但其精华在于开发基于Erlang OTP的系统应用。
+Elixir改进了Erlang晦涩的语法（使之变得像Ruby），从而降低了OTP系统应用开发的门槛。
+
+本章将涵盖如何安装Elixir，并且学习使用交互式的Elixir Shell（称为IEx）。
 
 使用本教程的需求：
-  - Erlang - V17.0或更高
-  - Elixir - V0.15.0或更高
+  - Erlang - version 17.0 或更高
+  - Elixir - 1.0.0 或更高
 
-开始吧！
+现在开始吧！
 
-## 1.1-安装程序
-Elixir为Windows平台提供了安装程序（Installer）：
-  - Windows Installer：[Here](http://s3.hex.pm/elixir-websetup.exe)
+>如果你发现本手册有错误，请帮忙开issue或发pull request。
 
-该安装程序包括了最新版本的Elixir和Erlang。
+## 1.1-安装包
+在各个平台上最方便的安装方式是相应平台的安装包。
+如果没有，推荐使用precompiled package或者用源码编译安装。   
 
-## 1.2-其它平台
-Elixir可以工作在以下系统平台上：
-  - 在MaxOS X上使用Homebrew
-    - brew update
-    - brew install elixir
-  - 在MacOS X上使用Macports
-    - sudo port install elixir
-  - Fedora 17+/Rawhide
-    - sudo yum -y install elixir
-  - Arch Linux (on AUR)
-    - yaourt -S elixir
+注意Elixir需要Erlang 17.0或更高。下面介绍的方法基本上都会自动为你安装Erlang。
+假如没有，请阅读下面安装Erlang的说明。
+
+### Mac OS X
+- Homebrew
+  - 升级Homebrew到最新
+  - 执行：```brew install elixir```
+- Macports
+  - 执行：```sudo port install elixir```
+
+### Unix（或者类Unix）
+  - Fedora 17或更新
+    - 执行：```yum install elixir```
+  - Fedora 22或更新
+    - 执行：```dnf install elixir```
+  - Arch Linux (社区repo)
+    - 执行：```pacman -S elixir```
   - openSUSE (and SLES 11 SP3+)
-    - ar -f obs://devel:languages:erlang/ erlang
-    - zypper in elixir
+    - 添加Erlang devel repo: ```zypper ar -f obs://devel:languages:erlang/ erlang```
+    - 执行：```zypper in elixir```
   - Gentoo
-    - emerge --ask dev-lang/elixir
-  - 在Windows上使用Chocolatey
-    - cinst elixir
+    - 执行：```emerge --ask dev-lang/elixir```
   - FreeBSD
-    - 使用ports: cd /usr/ports/lang/elixir && make install clean
-    - 或使用pkg: pkg install elixir
+    - 使用ports: ```cd /usr/ports/lang/elixir && make install clean```
+    - 或使用pkg: ```pkg install elixir```
+  - Ubuntu 12.04和14.04，或Debian 7
+    - 添加Erlang Solutions repo: ```wget https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb && sudo dpkg -i erlang-solutions_1.0_all.deb```
+    - 执行：```sudo apt-get update```
+    - 安装Erlang/OTP平台及相关程序：```sudo apt-get install esl-erlang```
+    - 安装Elixir：```sudo apt-get install elixir```
 
-以上方法都应该会自动安装Erlang。
-如果没有，请参考[1.5-安装Erlang](#15-%E5%AE%89%E8%A3%85erlang)。   
-
-Ubuntu用户：
-  - 最方便的方法就是安装Erlang后，下载与编译包。解压并且export PATH。
+### Windows
+  - Web installer
+    - [下载installer](https://s3.amazonaws.com/s3.hex.pm/elixir-websetup.exe)
+    - 点下一步，下一步...直到完成
+  - Chocolatey
+    - ```cinst elixir ```
 
 ## 1.3-使用预编译包
-如果想尝鲜，Elixir为每一个release提供了预编译包（编译好并打包的程序，开箱即用）。   
-首先[安装Erlang](http://elixir-lang.org/getting_started/1.html#1.5-installing-erlang)，
+Elixir为每一个release提供了预编译包（编译好并打包的程序，开箱即用）。   
+首先[安装Erlang](http://elixir-lang.org/install.html#installing-erlang)，
 然后在[这里](https://github.com/elixir-lang/elixir/releases/)下载最新的
-预编译包（Precompiled.zip），开zip，即可使用elixir和iex了。   
-当然为了方便起见，可将这些可执行文件的路径加入环境变量。
+预编译包（Precompiled.zip）。unzip，即可使用elixir程序和iex程序了。   
+当然为了方便起见，需要将一些路径加入环境变量。
 
-## 1.4-从源码编译安装
-首先[安装Erlang](http://elixir-lang.org/getting_started/1.html#1.5-installing-erlang)，
+## 1.4-从源码编译安装（Unix和MinGW）
+首先[安装Erlang](http://elixir-lang.org/install.html#installing-erlang)，
 然后在[这里](https://github.com/elixir-lang/elixir/releases/)下载最新的源码，
 自己使用make工具编译安装。
 
@@ -73,13 +85,13 @@ Ubuntu用户：
 $ export PATH="$PATH:/path/to/elixir/bin"
 ```
 
->如果你十分激进，可以直接选择编译安装github上的master分支：
+如果你十分激进，可以直接选择编译安装github上的master分支：
 ```sh
 $ git clone https://github.com/elixir-lang/elixir.git
 $ cd elixir
 $ make clean test
 ```
-如果测试无法通过，可在[repo](https://github.com/elixir-lang/elixir)的Issue里汇报。
+如果测试无法通过，可在[repo](https://github.com/elixir-lang/elixir)里开issue汇报。
 
 ## 1.5-安装Erlang
 安装Elixir唯一的要求就是Erlang（V17.0+），
@@ -111,6 +123,8 @@ iex> "hello" <> " world"
 "hello world"
 ```
 对这种交互式命令行，相信熟悉ruby，python等动态语言的程序员一定不会陌生。
+
+>如果你用的是Windows，你可以使用```iex.bat --werl```，可以根据你的console获得更好的使用体验。
 
 ## 1.7-执行脚本
 把表达式写进脚本文件，可以用```elixir```命令执行它。如：
