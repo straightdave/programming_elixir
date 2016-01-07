@@ -195,7 +195,7 @@ hello
 defmodule Concat do
   def join(a, b \\ nil, sep \\ " ")
 
-  def join(a, b, _sep) when nil?(b) do
+  def join(a, b, _sep) when is_nil(b) do
     a
   end
 
