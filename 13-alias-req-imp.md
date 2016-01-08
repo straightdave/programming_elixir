@@ -201,7 +201,7 @@ defmodule Example do
   require Feature
   Feature.__using__(option: :value)
 end
-···
+```
 With this we are almost finishing our tour about Elixir modules. The last topic to cover is module attributes.
 在以后章节我们可以看到，别名在宏机制中扮演了很重要的角色，来保证宏是干净的（hygienic）。
 
