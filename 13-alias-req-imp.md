@@ -170,6 +170,39 @@ defmodule Elixir.Foo do
   alias Elixir.Foo.Bar, as: Bar
 end
 ```
+## 13.6-多个
+到Elixir v1.2，可以一次使用alias,import,require多个模块。这在建立Elixir程序的时候很常见，特别是使用嵌套的时候是最有用了。例如，假设你的程序所有模块都嵌套在```MyApp```下，需要使用别名``` MyApp.Foo```,```MyApp.Bar```和```MyApp.Baz```，可以像下面一次完成：
+
+```elixir
+alias MyApp.{Foo, Bar, Baz}
+```
+## 13.7-```use```
+
+use用于请求在当前上下文中允许使用其他模块，是一个宏不是指令。开发者频繁使用```use```宏在当前上下文范围内引入其他功能，通常是模块。
+
+例如，在编写测试时需要使用ExUni框架，开发者需要使用```ExUnit.Case``` 模块：
+```elixir
+defmodule AssertionTest do
+  use ExUnit.Case, async: true
+
+  test "always pass" do
+    assert true
+  end
+end
+```
+在后面，```use```请求需要的模块，然后调用```__using__/1```回调函数，允许模块在当前上下文中注入这些代码。总体说，如下模块：
+```exlixir
+defmodule Example do
+  use Feature, option: :value
+end
+```
+会编译成
+```exlixir
+defmodule Example do
+  require Feature
+  Feature.__using__(option: :value)
+end
+```
 
 在以后章节我们可以看到，别名在宏机制中扮演了很重要的角色，来保证宏是干净的（hygienic）。
 
