@@ -170,7 +170,39 @@ defmodule Elixir.Foo do
   alias Elixir.Foo.Bar, as: Bar
 end
 ```
+## 13.6-多个
+From Elixir v1.2, it is possible to alias, import or require multiple modules at once. This is particularly useful once we start nesting modules, which is very common when building Elixir applications. For example, imagine you have an application where all modules are nested under MyApp, you can alias the modules MyApp.Foo, MyApp.Bar and MyApp.Baz at once as follows:
 
+```elixir
+alias MyApp.{Foo, Bar, Baz}
+```
+## 13.7-use
+Although not a directive, use is a macro tightly related to require that allows you to use a module in the current context. The use macro is frequently used by developers to bring external functionality into the current lexical scope, often modules.
+
+For example, in order to write tests using the ExUnit framework, a developer should use the ExUnit.Case module:
+```elixir
+defmodule AssertionTest do
+  use ExUnit.Case, async: true
+
+  test "always pass" do
+    assert true
+  end
+end
+```
+Behind the scenes, use requires the given module and then calls the __using__/1 callback on it allowing the module to inject some code into the current context. Generally speaking, the following module:
+```exlixir
+defmodule Example do
+  use Feature, option: :value
+end
+```
+is compiled into
+```exlixir
+defmodule Example do
+  require Feature
+  Feature.__using__(option: :value)
+end
+···
+With this we are almost finishing our tour about Elixir modules. The last topic to cover is module attributes.
 在以后章节我们可以看到，别名在宏机制中扮演了很重要的角色，来保证宏是干净的（hygienic）。
 
 讨论到这里，模块基本上讲得差不多了。之后会讲解模块的属性。
