@@ -17,7 +17,7 @@ iex> %{map | a: 3}
 iex> defmodule User do
 ...>   defstruct name: "john", age: 27
 ...> end
-{:module, User, <<70, 79, 82, ...>>, {:__struct__, 0}}
+
 ```
 
 现在可以用```%User()```语法创建这个结构体的“实例”了：
