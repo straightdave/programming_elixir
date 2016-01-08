@@ -171,15 +171,16 @@ defmodule Elixir.Foo do
 end
 ```
 ## 13.6-多个
-From Elixir v1.2, it is possible to alias, import or require multiple modules at once. This is particularly useful once we start nesting modules, which is very common when building Elixir applications. For example, imagine you have an application where all modules are nested under MyApp, you can alias the modules MyApp.Foo, MyApp.Bar and MyApp.Baz at once as follows:
+到Elixir v1.2，可以一次使用alias,import,require多个模块。这在建立Elixir程序的时候很常见，特别是使用嵌套的时候是最有用了。例如，假设你的程序所有模块都嵌套在```MyApp```下，需要使用别名``` MyApp.Foo```,```MyApp.Bar```和```MyApp.Baz```，可以像下面一次完成：
 
 ```elixir
 alias MyApp.{Foo, Bar, Baz}
 ```
-## 13.7-use
-Although not a directive, use is a macro tightly related to require that allows you to use a module in the current context. The use macro is frequently used by developers to bring external functionality into the current lexical scope, often modules.
+## 13.7-```use```
 
-For example, in order to write tests using the ExUnit framework, a developer should use the ExUnit.Case module:
+use用于请求在当前上下文中允许使用其他模块，是一个宏不是指令。开发者频繁使用```use```宏在当前上下文范围内引入其他功能，通常是模块。
+
+例如，在编写测试时需要使用ExUni框架，开发者需要使用```ExUnit.Case``` 模块：
 ```elixir
 defmodule AssertionTest do
   use ExUnit.Case, async: true
@@ -189,20 +190,20 @@ defmodule AssertionTest do
   end
 end
 ```
-Behind the scenes, use requires the given module and then calls the __using__/1 callback on it allowing the module to inject some code into the current context. Generally speaking, the following module:
+在后面，```use```请求需要的模块，然后调用```__using__/1```回调函数，允许模块在当前上下文中注入这些代码。总体说，如下模块：
 ```exlixir
 defmodule Example do
   use Feature, option: :value
 end
 ```
-is compiled into
+会编译成
 ```exlixir
 defmodule Example do
   require Feature
   Feature.__using__(option: :value)
 end
 ```
-With this we are almost finishing our tour about Elixir modules. The last topic to cover is module attributes.
+
 在以后章节我们可以看到，别名在宏机制中扮演了很重要的角色，来保证宏是干净的（hygienic）。
 
 讨论到这里，模块基本上讲得差不多了。之后会讲解模块的属性。
