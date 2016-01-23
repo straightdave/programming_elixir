@@ -102,7 +102,7 @@ iex> case :ok do
 ** (CaseClauseError) no case clause matching: :ok
 ```
 
-匿名函数也可以像下面这样，用多个模式或条件条件来灵活地匹配该函数的参数：
+匿名函数也可以像下面这样，用多个模式或条件子句来灵活地匹配该函数的参数：
 ```elixir
 iex> f = fn
 ...>   x, y when x > 0 -> x + y
