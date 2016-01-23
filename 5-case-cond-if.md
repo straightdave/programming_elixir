@@ -1,7 +1,7 @@
 5-流程控制
 ==========
 [case](#51-case)   
-[卫兵子句中的表达式](#52-%E5%8D%AB%E5%85%B5%E5%AD%90%E5%8F%A5%E4%B8%AD%E7%9A%84%E8%A1%A8%E8%BE%BE%E5%BC%8F)    
+[条件子句中的表达式](#52-%E5%8D%AB%E5%85%B5%E5%AD%90%E5%8F%A5%E4%B8%AD%E7%9A%84%E8%A1%A8%E8%BE%BE%E5%BC%8F)    
 [cond](#53-cond)    
 [if和unless](#54-if%E5%92%8Cunless)   
 [do语句块](#55-do%E8%AF%AD%E5%8F%A5%E5%9D%97)    
@@ -31,7 +31,7 @@ iex> case 10 do
 ...> end
 ```
 
-可以加上卫兵子句（guard clauses）提供额外的条件：
+可以加上条件子句（guard clauses）提供额外的条件：
 ```elixir
 iex> case {1, 2, 3} do
 ...>   {1, x, 3} when x > 0 ->
@@ -42,8 +42,8 @@ iex> case {1, 2, 3} do
 ```
 于是上面例子中，第一个待比较的模式多了一个条件：x必须是正数。
 
-## 5.2-卫兵子句中的表达式
-Erlang中只允许以下表达式出现在卫兵子句中：
+## 5.2-条件子句中的表达式
+Erlang中只允许以下表达式出现在条件子句中：
   - 比较运算符（==，!=，===，!==，>，<，<=，>=）
   - 布尔运算符（and，or）以及否定运算符（not，!）
   - 算数运算符（+，-，*，/）
@@ -82,7 +82,7 @@ Erlang中只允许以下表达式出现在卫兵子句中：
     - trunc(number)
     - tuple_size(tuple)
 
-记住，卫兵子句中出现的错误不会漏出，只会简单地让卫兵条件失败：
+注意：条件子句中如出现错误，它不会抛出异常，这种情况条件子句返回的是false,如下：  
 ```elixir
 iex> hd(1)
 ** (ArgumentError) argument error
@@ -102,7 +102,7 @@ iex> case :ok do
 ** (CaseClauseError) no case clause matching: :ok
 ```
 
-匿名函数也可以像下面这样，用多个模式或卫兵条件来灵活地匹配该函数的参数：
+匿名函数也可以像下面这样，用多个模式或条件条件来灵活地匹配该函数的参数：
 ```elixir
 iex> f = fn
 ...>   x, y when x > 0 -> x + y
