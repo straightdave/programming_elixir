@@ -12,11 +12,12 @@ Elixir还是一门初出茅庐的语言：
 2014年9月7日晚，1.0.0rc2发布   
 2014年9月10日，1.0.0正式发布   
 2015年9月28日，[1.1发布](http://elixir-lang.org/blog/2015/09/28/elixir-v1-1-0-released/)   
-2016年1月1日，v1.2.0算是发布了。官网没更新但是Github上已经release出相应branch和Changelog。
+2016年1月1日，v1.2.0发布
 
 翻译互联网上诸多Elixir资源，以期能够促进自己和大家学习和推广Elixir编程   
-主要资料来源于[Elixir官网](http://elixir-lang.com)等站点，以及花大钱买的原版书籍
+主要资料来源于[Elixir官网](http://elixir-lang.com)等站点，以及花大钱:sob:买的原版书籍
 
+>请帮助更新文档(pr)。有问题请发issue
 
 **基本教程**
 
