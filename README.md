@@ -1,10 +1,12 @@
 Elixir编程入门
 =============
 
-Elixir，[ɪ'lɪksər]，意为灵丹妙药、圣水，logo是一枚紫色水滴：   
+Elixir，[ɪ'lɪksər]，意为灵丹妙药、圣水，其logo是一枚紫色水滴：   
+   
 ![logo](http://elixir-lang.org/images/logo/logo.png)   
 
-Elixir是一门建立在Erlang虚拟机上的[**函数式**](http://baike.baidu.com/view/3476448.htm?fr=aladdin)的系统编程语言，支持元编程。创始人Valim是ruby界的知名人士。私以为，可以把Elixir看作函数式的ruby语言，或者语法改良的Erlang。Elixir受瞩目的原因，是因为它结合了Erlang作为系统编程语言的各种优点，以及类似ruby的语法（Erlang语法比较晦涩）。   
+Elixir是一门建立在Erlang虚拟机上的[**函数式**](http://baike.baidu.com/view/3476448.htm?fr=aladdin)的系统编程语言，支持元编程。创始人[José Valim](https://github.com/josevalim)是ruby界的知名人士。   
+私以为，可以把Elixir看作函数式的ruby语言，或者是语法类似ruby的Erlang。Elixir受瞩目的原因，是因为它结合了Erlang作为系统编程语言的各种优点，以及ruby那样简单易懂的语法（Erlang语法比较晦涩）。   
 
 Elixir还是一门初出茅庐的语言：   
 2014年8月31日，1.0.0发布   
@@ -14,8 +16,7 @@ Elixir还是一门初出茅庐的语言：
 2015年9月28日，[1.1发布](http://elixir-lang.org/blog/2015/09/28/elixir-v1-1-0-released/)   
 2016年1月1日，v1.2.0发布
 
-翻译互联网上诸多Elixir资源，以期能够促进自己和大家学习和推广Elixir编程   
-主要资料来源于[Elixir官网](http://elixir-lang.com)等站点，以及花大钱:sob:买的原版书籍
+本文主要框架为Elixir官方的入门教程，辅以网上其它Elixir资源的内容，以及花钱:sob:购买的原版书籍（Dave Thomas的《Programming Elixir》，Progmatic）   
 
 >请帮助更新文档(pr)。有问题请发issue
 
