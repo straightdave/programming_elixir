@@ -1,20 +1,17 @@
 21-Erlang库
 ============
 
-Elixir provides excellent interoperability with Erlang libraries. In fact,
-Elixir discourages simply wrapping Erlang libraries in favor of directly
-interfacing with Erlang code. In this section we will present some of the
-most common and useful Erlang functionality that is not found in Elixir.
+Elixir对Erlang库提供了完善的交互。实际上，Elixir不是简单地去对Erlang库进行语言包装，
+而是直接连接Erlang的代码。本章将展示一些Elixir中没有，但是常用（常见+有用）的Erlang功能。
 
-As you grow more proficient in Elixir, you may want to explore the Erlang
-[STDLIB Reference Manual](http://erlang.org/doc/apps/stdlib/index.html) in more
-detail.
+随着对Elixir更加深入的学习和使用，你可能会更多地参考Erlang的
+[标准库手册](http://erlang.org/doc/apps/stdlib/index.html)。
 
-## The binary module
+## 二进制串模块
 
-The built-in Elixir String module handles binaries that are UTF-8 encoded.
-[The binary module](http://erlang.org/doc/man/binary.html) is useful when
-you are dealing with binary data that is not necessarily UTF-8 encoded.
+内建的Elixir字符串模块处理UTF-8编码过的二进制串（binaries）。而Erlang的
+[二进制串模块](http://erlang.org/doc/man/binary.html)可能对你更加有用，
+因为它可以处理的二进制串不一定非要是UTF-8编码的：
 
 ```iex
 iex> String.to_char_list "Ø"
@@ -23,14 +20,12 @@ iex> :binary.bin_to_list "Ø"
 [195, 152]
 ```
 
-The above example shows the difference; the `String` module returns UTF-8
-codepoints, while `:binary` deals with raw data bytes.
+从上面的例子你就能看出一些区别来了；`String`模块返回UTF-8的字符码，
+而`:binary`是原始的数据字节。
 
-## Formatted text output
+## 格式化的字符串输出
 
-Elixir does not contain a function similar to `printf` found in C and other
-languages. An option is to rely on string interpolation to achieve a similar
-result:
+Elixir中并没有类似于C中的`printf`函数。作为一个可选项，你可以使用字符串插值来完成同样的功能：
 
 ```iex
 iex> f = Float.to_string(:math.pi, decimals: 3) |> String.rjust(10)
@@ -38,10 +33,9 @@ iex> str = "Pi is approximately given by: #{f}"
 "Pi is approximately given by:      3.142"
 ```
 
-Alternatively, the Erlang standard library functions `:io.format/2` and
-`:io_lib.format/2` may be used. The first formats to terminal output, while
-the second formats to an iolist. The format specifiers differ from `printf`,
-[refer to the Erlang documentation for details](http://erlang.org/doc/man/io.html#format-1).
+另外，还可以用Erlang标准库中的`:io.format/2`和`:io_lib.format/2`函数。
+第一个格式化后输出到终端，而第二个输出到一个iolist。具体格式化的语法和`pringf`略有区别，
+详见[Erlang文档](http://erlang.org/doc/man/io.html#format-1)：
 
 ```iex
 iex> :io.format("Pi is approximately given by:~10.3f~n", [:math.pi])
@@ -51,14 +45,12 @@ iex> to_string :io_lib.format("Pi is approximately given by:~10.3f~n", [:math.pi
 "Pi is approximately given by:     3.142\n"
 ```
 
-Also note that Erlang's formatting functions require special attention to
-Unicode handling.
+另外需要注意的是Erlang的格式化函数中对Unicode的处理。
 
-## The calendar module
+## 日历模块
 
-[The calendar module](http://erlang.org/doc/man/calendar.html) contains
-functions for conversion between local and universal time, as well as
-time conversion functions.
+[日历模块](http://erlang.org/doc/man/calendar.html) 包含本地时间和标准时间的转换函数，
+以及其它一些时间函数。
 
 ```iex
 iex> :calendar.day_of_the_week(1980, 6, 28)
@@ -70,20 +62,19 @@ iex> time
 {22, 4, 55}
 ```
 
-## The crypto module
+## 加密模块
 
-[The crypto module](http://erlang.org/doc/man/crypto.html) contains hashing
-functions, digital signatures, encryption and more:
+[加密模块](http://erlang.org/doc/man/crypto.html) 包含哈希方法，数字签名，
+加密等功能函数：
 
 ```iex
 iex> Base.encode16(:crypto.hash(:sha256, "Elixir"))
 "3315715A7A3AD57428298676C5AE465DADA38D951BDFAC9348A8A31E9C7401CB"
 ```
 
-The `:crypto` module is not part of the Erlang standard library, but is
-included with the Erlang distribution. This means you must list `:crypto`
-in your project's applications list whenever you use it. To do this,
-edit your `mix.exs` file to include:
+`:crypto` 模块不是Erlang的标准库，但是包含在了Erlang发行包中。
+这要求你必须在项目的配置文件中列出`:crypto`模块作为依赖项。
+通过修改`mix.exs`来加载该模块：
 
 ```elixir
   def application do
