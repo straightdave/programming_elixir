@@ -2,9 +2,10 @@
 ============
 
 Elixir对Erlang库提供了完善的交互。实际上，Elixir不是简单地去对Erlang库进行语言包装，
-而是直接连接Erlang的代码。本章将展示一些Elixir中没有，但是常用（常见+有用）的Erlang功能。
+而是直接连接Erlang的代码（因为同源，Elixir以特定语法来直接调用Erlang库函数）。
+本章将展示一些Elixir中没有，但是常用（常见+有用）的Erlang功能函数。
 
-随着对Elixir更加深入的学习和使用，你可能会更多地参考Erlang的
+>随着对Elixir更加深入的学习和使用，你可能会更多地阅读参考Erlang的
 [标准库手册](http://erlang.org/doc/apps/stdlib/index.html)。
 
 ## 二进制串模块
@@ -82,18 +83,14 @@ iex> Base.encode16(:crypto.hash(:sha256, "Elixir"))
   end
 ```
 
-## The digraph module
+## 有向图模块
 
-[The digraph module](http://erlang.org/doc/man/digraph.html) (as well as
-[digraph_utils](http://erlang.org/doc/man/digraph_utils.html)) contains
-functions for dealing with directed graphs built of vertices and edges.
-After constructing the graph, the algorithms in there will help finding
-for instance the shortest path between two vertices, or loops in the graph.
+[有向图模块](http://erlang.org/doc/man/digraph.html) （以及
+[有向图模块工具](http://erlang.org/doc/man/digraph_utils.html)）
+包含了处理有向图（有丁点和边构成）的函数。
+创建了一个图实例之后，模块的算法即可帮助找寻顶点最短路径、图中的环等。
 
-Note that the functions in `:digraph` alter the graph structure indirectly
-as a side effect, while returning the added vertices or edges.
-
-Given three vertices, find the shortest path from the first to the last.
+给出三个顶点，找寻从第一个到最后一个顶点的最短路径：
 
 ```iex
 iex> digraph = :digraph.new()
@@ -105,19 +102,16 @@ iex> :digraph.get_short_path(digraph, v0, v2)
 [{0.0, 0.0}, {1.0, 0.0}, {1.0, 1.0}]
 ```
 
-## Erlang Term Storage
+## ETS（Erlang Term Storage）：Erlang的“Term存储”机制
 
-The modules [`ets`](http://erlang.org/doc/man/ets.html) and
-[`dets`](http://erlang.org/doc/man/dets.html) handle storage of large
-data structures in memory or on disk respectively.
+模块[`ets`](http://erlang.org/doc/man/ets.html)以及
+[`dets`](http://erlang.org/doc/man/dets.html)
+分别处理在内存中、磁盘上存储大型数据结构。
 
-ETS lets you create a table containing tuples. By default, ETS tables
-are protected, which means only the owner process may write to the table
-but any other process can read. ETS has some functionality to be used as
-a simple database, a key-value store or as a cache mechanism.
+ETS创建一个表来存储元祖。默认情况下，ETS表是受保护的：只有owner进程才能写表，
+其它进程只可以读。ETS提供了一些功能，可被当做简单的数据库、键值存储或cache机制使用。
 
-The functions in the `ets` module will modify the state of the table as a
-side-effect.
+作为副作用，`ets`模块中的函数会修改表的状态。
 
 ```iex
 iex> table = :ets.new(:ets_test, [])
@@ -131,11 +125,10 @@ iex> :ets.i(table)
 <3   > {"India", 1_284_000_000}
 ```
 
-## The math module
+## 数学模块
 
-[The `math` module](http://erlang.org/doc/man/math.html) contains common
-mathematical operations covering trigonometry, exponential and logarithmic
-functions.
+[数学模块](http://erlang.org/doc/man/math.html) 包含了常用数学操作，
+如三角函数、指数或底数函数等等。
 
 ```iex
 iex> angle_45_deg = :math.pi() * 45.0 / 180.0
@@ -147,10 +140,10 @@ iex> :math.log(7.694785265142018e23)
 55.0
 ```
 
-## The queue module
+## 队列（queue）模块
 
-The [`queue` is a data structure](http://erlang.org/doc/man/queue.html)
-that implements (double-ended) FIFO (first-in first-out) queues efficiently:
+[队列 `queue` 是一种数据结构](http://erlang.org/doc/man/queue.html)
+实现了双向先进先出的高效率队列：
 
 ```iex
 iex> q = :queue.new
@@ -167,10 +160,9 @@ iex> value
 :empty
 ```
 
-## The rand module
+## 随机值（rand）模块
 
-[`rand` has functions](http://erlang.org/doc/man/rand.html) for returning
-random values and setting the random seed.
+[`rand`模块函数](http://erlang.org/doc/man/rand.html) 可以返回随机值或是设置随机seed：
 
 ```iex
 iex> :rand.uniform()
@@ -182,20 +174,20 @@ iex> :rand.uniform(6)
 6
 ```
 
-## The zip and zlib modules
+## zip和zlib模块
 
-[The `zip` module](http://erlang.org/doc/man/zip.html) lets you read and write zip files to and from disk or memory,
-as well as extracting file information.
+[`zip`模块](http://erlang.org/doc/man/zip.html) 可以让你读写磁盘或内存中的zip文件，
+以及提取其文件信息等。
 
-This code counts the number of files in a zip file:
+以下代码计算了zip压缩包中的文件数量：
 
 ```iex
 iex> :zip.foldl(fn _, _, _, acc -> acc + 1 end, 0, :binary.bin_to_list("file.zip"))
 {:ok, 633}
 ```
 
-[The `zlib` module](http://erlang.org/doc/man/zlib.html) deals with data compression in zlib format, as found in the
-`gzip` command.
+[`zlib`模块](http://erlang.org/doc/man/zlib.html) 处理zlib格式的数据压缩
+（如gzip中用的）：
 
 ```iex
 iex> song = "
