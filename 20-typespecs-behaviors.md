@@ -1,50 +1,61 @@
 20-Typespecs和behaviors
 =======================
 
-## Types and specs
+## 类型（type）和规格说明（spec）
 
-Elixir是一门动态类型语言，Elixir中所有类型都是在运行时动态推定的。
-然而，Elixir还是提供了 **typespecs** 标记，用来：   
-1. 声明自定义数据类型     
-2. 声明含有类型的函数签名（即函数的规格说明）     
+Elixir是一门动态类型语言，Elixir中所有数据类型都是在运行时动态推定的。
+然而，Elixir还提供了 **typespecs** 标记，用来：   
 
-### 函数的规格说明
+  1. 声明自定义数据类型     
+  2. 声明含有显式类型说明的函数签名（即函数的规格说明）     
 
-默认地，Elixir提供了一些基础类型，比如`integer`或者`pid`，还有其它一些复杂的：
-如`round/1`函数，它对一个float类型四舍五入。它以一个`number`作为参数
-（一个`integer`或`float`），返回一个`integer`。   
-你可以阅读[这篇文档](http://elixir-lang.org/docs/stable/elixir/Kernel.html#round/1),
-`round/1`含有类型的签名为：
+### 函数的规格说明（spec）
+
+默认地，Elixir提供了一些基础数据类型，比如 `integer` 或者 `pid`。还有其它一些复杂的：
+如函数`round/1`，它对一个float类型的数值四舍五入。
+它以一个`number`（一个`integer`或`float`）作为参数，返回一个`integer`。 
+
+[round函数的文档](http://elixir-lang.org/docs/stable/elixir/Kernel.html#round/1)
+里面描述`round/1`的函数签名为：
+
 ```
 round(number) :: integer
 ```
 
-`::` means that the function on the left side *returns* a value whose type is what's on the right side. Function specs are written with the `@spec` directive, placed right before the function definition. The `round/1` function could be written as:
+`::` 表示其左边的函数 *返回* 一个其右面声明的类型的值。
+函数的规格说明写在函数定义的前面、以`@spec`指令打头。
+比如`round/1`函数可以这么写：
 
 ```elixir
 @spec round(number) :: integer
-def round(number), do: # implementation...
+def round(number), do: # 具体实现 ...
 ```
 
-Elixir supports compound types as well. For example, a list of integers has type `[integer]`. You can see all the built-in types provided by Elixir [in the typespecs docs](/docs/stable/elixir/typespecs.html).
+Elixir还支持组合类型。例如，整数的列表，它的类型表示为`[integer]`。
+可以阅读[typespecs的文档](http://elixir-lang.org/docs/stable/elixir/typespecs.html)
+查看Elixir提供的所有内建类型。
 
-### Defining custom types
+### 定义自定义类型
 
-While Elixir provides a lot of useful built-in types, it's convenient to define custom types when appropriate. This can be done when defining modules through the `@type` directive.
+Elixir提供了许多有用的内建类型，而且也很方便去创建自定义类型应用于合适的场景。
+在定义模块的时候，通过加上`@type`指令就可以实现。
 
-Say we have a `LousyCalculator` module, which performs the usual arithmetic operations (sum, product and so on) but, instead of returning numbers, it returns tuples with the result of an operation as the first element and a random remark as the second element.
+比方我们有个模块叫做`LuosyCalculator`，可以执行常见的算术计算（如求和、计算乘积等）。
+但是，它不是返回数值，而是返回一个元祖，该元祖第一个元素是计算结果，第二个是随机的文字记号。
 
 ```elixir
 defmodule LousyCalculator do
   @spec add(number, number) :: {number, String.t}
-  def add(x, y), do: {x + y, "You need a calculator to do that?!"}
+  def add(x, y), do: {x + y, "你用计算器算这个？！"}
 
   @spec multiply(number, number) :: {number, String.t}
-  def multiply(x, y), do: {x * y, "Jeez, come on!"}
+  def multiply(x, y), do: {x * y, "老天，不是吧？！"}
 end
 ```
 
-As you can see in the example, tuples are a compound type and each tuple is identified by the types inside it. To understand why `String.t` is not written as `string`, have another look at the [notes in the typespecs docs](/docs/stable/elixir/typespecs.html#Notes).
+从例子中可以看出，元祖是复合类型。每个元祖都定义了其具体元素类型。
+至于为何是`String.t`而不是`string`，可以参考
+[这篇文章](http://elixir-lang.org/docs/stable/elixir/typespecs.html#Notes)。
 
 Defining function specs this way works, but it quickly becomes annoying since we're repeating the type `{number, String.t}` over and over. We can use the `@type` directive in order to declare our own custom type.
 
@@ -130,5 +141,6 @@ defmodule YAMLParser do
   def extensions, do: ["yml"]
 end
 ```
+
 
 If a module adopting a given behaviour doesn't implement one of the callbacks required by that behaviour, a compile-time warning will be generated.
