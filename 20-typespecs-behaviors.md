@@ -13,7 +13,7 @@ Elixir是一门动态类型语言，Elixir中所有数据类型都是在运行�
 
 默认地，Elixir提供了一些基础数据类型，比如 `integer` 或者 `pid`。还有其它一些复杂的：
 如函数`round/1`，它对一个float类型的数值四舍五入。
-它以一个`number`（一个`integer`或`float`）作为参数，返回一个`integer`。 
+它以一个`number`（一个`integer`或`float`）作为参数，返回一个`integer`。
 
 [round函数的文档](http://elixir-lang.org/docs/stable/elixir/Kernel.html#round/1)
 里面描述`round/1`的函数签名为：
@@ -53,11 +53,13 @@ defmodule LousyCalculator do
 end
 ```
 
-从例子中可以看出，元祖是复合类型。每个元祖都定义了其具体元素类型。
+从例子中可以看出，元组是复合类型。每个元组都定义了其具体元素类型。
 至于为何是`String.t`而不是`string`，可以参考
 [这篇文章](http://elixir-lang.org/docs/stable/elixir/typespecs.html#Notes)。
 
-Defining function specs this way works, but it quickly becomes annoying since we're repeating the type `{number, String.t}` over and over. We can use the `@type` directive in order to declare our own custom type.
+像这样定义函数规格说明是没问题，但是一次次重复写这种复合类型的
+样式名称`{number, String.t}`，很快会厌烦。
+我们可以使用`@type`指令来声明我们自定义的类型：
 
 ```elixir
 defmodule LousyCalculator do
@@ -74,9 +76,9 @@ defmodule LousyCalculator do
 end
 ```
 
-The `@typedoc` directive, similarly to the `@doc` and `@moduledoc` directives, is used to document custom types.
+指令`@typedoc`，和`@doc`或`@moduledoc`指令类似，被用来记录自定义类型。
 
-Custom types defined through `@type` are exported and available outside the module they're defined in:
+自定义类型通过`@type`定义，可以从其定义的模块导出并被外界访问：
 
 ```elixir
 defmodule QuietCalculator do
@@ -88,11 +90,15 @@ defmodule QuietCalculator do
 end
 ```
 
-If you want to keep a custom type private, you can use the `@typep` directive instead of `@type`.
+如果想要将某个自定义类型保持私有，可以使用 `@typep` 指令代替 `@type` 。
 
-### Static code analysis
+### 静态代码分析
 
-Typespecs are not only useful to developers and as additional documentation. The Erlang tool [Dialyzer](http://www.erlang.org/doc/man/dialyzer.html), for example, uses typespecs in order to perform static analysis of code. That's why, in the `QuietCalculator` example, we wrote a spec for the `make_quiet/1` function even if it was defined as a private function.
+Typespecs的作用不仅仅是被用来作为程序文档说明。举个例子，
+Erlang工具[Dialyzer][Dialyzer](http://www.erlang.org/doc/man/dialyzer.html)
+使用typespecs来进行代码静态分析。
+这就是为什么我们在 `QuiteCalculator` 例子中，
+即使 `make_quite/1` 是个私有函数，也写了函数规格说明。
 
 ## Behaviours
 
