@@ -100,22 +100,27 @@ Erlang工具[Dialyzer][Dialyzer](http://www.erlang.org/doc/man/dialyzer.html)
 这就是为什么我们在 `QuiteCalculator` 例子中，
 即使 `make_quite/1` 是个私有函数，也写了函数规格说明。
 
-## Behaviours
+## 行为（behavior）
 
-Many modules share the same public API. Take a look at [Plug](https://github.com/elixir-lang/plug), which, as its description states, is a **specification** for composable modules in web applications. Each *plug* is a module which **has to** implement at least two public functions: `init/1` and `call/2`.
+许多模块公用相同的公共API。可以参考下[Plug](https://github.com/elixir-lang/plug)，
+正如它的描述所言，是一个用于互联网应用的、可编辑的模块的**规格声明**。
+每个所谓*plug*就是一个**必须**实现至少两个公共函数：`init/1`和`call/2`的模块。
 
-Behaviours provide a way to:
+行为提供了一种方法，用来：
 
-* define a set of functions that have to be implemented by a module;
-* ensure that a module implements all the functions in that set.
+* 定义一系列必须实现的函数
+* 确保模块实现所有这些函数
 
-If you have to, you can think of behaviours like interfaces in object oriented languages like Java: a set of function signatures that a module has to implement.
+你也可以把这些行为想象为面向对象语言里的接口：模块必须实现的一系列函数签名。
 
-### Defining behaviours
+### 定义行为（Defining behaviors）
 
-Say we want to implement a bunch of parsers, each parsing structured data: for example, a JSON parser and a YAML parser. Each of these two parsers will *behave* the same way: both will provide a `parse/1` function and an `extensions/0` function. The `parse/1` function will return an Elixir representation of the structured data, while the `extensions/0` function will return a list of file extensions that can be used for each type of data (e.g., `.json` for JSON files).
+假如说我们希望实现一系列parser，每个parser解析结构化的数据：比如，一个JSON parser或是YAML parser。
+这两个parser的*行为*几近相同：
+它们都提供一个`parse/1`函数和一个`extensions/0`函数。`parse/1`函数返回一个数据对应的Elixir表达。
+而`extensions/0`函数返回一个可被其解析的文件的扩展名列表（如，JSON文件是`.json`）。
 
-We can create a `Parser` behaviour:
+我们可以创建一个名为`Parser`的行为：
 
 ```elixir
 defmodule Parser do
@@ -124,11 +129,13 @@ defmodule Parser do
 end
 ```
 
-Modules adopting the `Parser` behaviour will have to implement all the functions defined with the `@callback` directive. As you can see, `@callback` expects a function name but also a function specification like the ones used with the `@spec` directive we saw above.
+那么，采用`Parser`这个行为的模块，必须实现所有被`@callback`指令标记的函数。正如你所看到的，
+`@callback`指令不但可以接受一个函数名，还可以接受一个函数规格定义（我们在本文开头讲述的，函数的spec）。
 
-### Adopting behaviours
 
-Adopting a behaviour is straightforward:
+### 采用行为（adopting behavior）
+
+模块采用一个行为的语法非常直白：
 
 ```elixir
 defmodule JSONParser do
@@ -148,5 +155,4 @@ defmodule YAMLParser do
 end
 ```
 
-
-If a module adopting a given behaviour doesn't implement one of the callbacks required by that behaviour, a compile-time warning will be generated.
+如果一个模块采用了一个尚未完全实现其所需回调方法的**行为（behavior）**，这将生成一个编译时错误。
