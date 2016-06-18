@@ -1,8 +1,10 @@
 21-Erlang库
 ============
 
-Elixir对Erlang库提供了完善的交互。实际上，Elixir不是简单地去对Erlang库进行语言包装，
-而是直接连接Erlang的代码（因为同源，Elixir以特定语法来直接调用Erlang库函数）。
+正如前文所言，Elixir是基于Erlang实现的编程语言。
+对于Erlang语言库，Elixir提供了完善的交互能力。
+而且，实际上，Elixir不只是简单地对Erlang库功能进行语言上的包装（是的，没有Elixir版本的对应Erlang库函数），
+而是直接连接Erlang代码（因为同源，Elixir以特定语法来直接调用Erlang库函数）。
 本章将展示一些Elixir中没有，但是常用（常见+有用）的Erlang功能函数。
 
 >随着对Elixir更加深入的学习和使用，你可能会更多地阅读参考Erlang的
@@ -10,8 +12,8 @@ Elixir对Erlang库提供了完善的交互。实际上，Elixir不是简单地�
 
 ## 二进制串模块
 
-内建的Elixir字符串模块处理UTF-8编码过的二进制串（binaries）。而Erlang的
-[二进制串模块](http://erlang.org/doc/man/binary.html)可能对你更加有用，
+内建的Elixir字符串模块用来处理UTF-8编码过的二进制串（binaries）。
+而Erlang的[二进制串模块](http://erlang.org/doc/man/binary.html)可能对你更加有用，
 因为它可以处理的二进制串不一定非要是UTF-8编码的：
 
 ```iex
@@ -23,6 +25,9 @@ iex> :binary.bin_to_list "Ø"
 
 从上面的例子你就能看出一些区别来了；`String`模块返回UTF-8的字符码，
 而`:binary`是原始的数据字节。
+
+>Elixir引用Erlang的库函数十分简单。正如这个例子所示，在Erlang库模块名称前面加上冒号，
+就可以直接调用Erlang的库函数了。
 
 ## 格式化的字符串输出
 

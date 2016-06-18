@@ -6,25 +6,28 @@
 Elixir是一门动态类型语言，Elixir中所有数据类型都是在运行时动态推定的。
 然而，Elixir还提供了 **typespecs** 标记，用来：   
 
-  1. 声明自定义数据类型     
-  2. 声明含有显式类型说明的函数签名（即函数的规格说明）     
+  1. 声明自定义数据类型
+  2. 声明含有显式类型说明的函数签名（即函数的规格说明）
 
 ### 函数的规格说明（spec）
 
-默认地，Elixir提供了一些基础数据类型，比如 `integer` 或者 `pid`。还有其它一些复杂的：
-如函数`round/1`，它对一个float类型的数值四舍五入。
+默认地，Elixir提供了一些基础数据类型，表示为 `integer` 或者 `pid`。
+还有一些复杂情形：如函数`round/1`为例，它对一个float类型的数值四舍五入。
 它以一个`number`（一个`integer`或`float`）作为参数，返回一个`integer`。
 
-[round函数的文档](http://elixir-lang.org/docs/stable/elixir/Kernel.html#round/1)
-里面描述`round/1`的函数签名为：
+那么，它在[round函数的文档](http://elixir-lang.org/docs/stable/elixir/Kernel.html#round/1)
+里面记载的函数签名为：
 
 ```
 round(number) :: integer
 ```
 
-`::` 表示其左边的函数 *返回* 一个其右面声明的类型的值。
-函数的规格说明写在函数定义的前面、以`@spec`指令打头。
-比如`round/1`函数可以这么写：
+`::` 表示其左边的函数 *返回* 一个其右面声明的类型的值。函数名后面括号中是参数类型的列表。
+
+如果想特别注明某个函数的参数类型及返回值类型，那么可以在定义函数的时候，
+在函数前面使用`@spec`指令附加上函数的规格说明（spec）。
+
+比如，在函数库源码中，函数`round/1`是这么写的：
 
 ```elixir
 @spec round(number) :: integer
@@ -33,32 +36,34 @@ def round(number), do: # 具体实现 ...
 
 Elixir还支持组合类型。例如，整数的列表，它的类型表示为`[integer]`。
 可以阅读[typespecs的文档](http://elixir-lang.org/docs/stable/elixir/typespecs.html)
-查看Elixir提供的所有内建类型。
+查看Elixir提供的所有内建类型的表示方法。
 
 ### 定义自定义类型
 
-Elixir提供了许多有用的内建类型，而且也很方便去创建自定义类型应用于合适的场景。
-在定义模块的时候，通过加上`@type`指令就可以实现。
+Elixir提供了许多有用的内建类型，而且也方便创建自定义类型应用于特定场景。
+方法是在定义的时候，加上`@type`指令。
 
-比方我们有个模块叫做`LuosyCalculator`，可以执行常见的算术计算（如求和、计算乘积等）。
-但是，它不是返回数值，而是返回一个元祖，该元祖第一个元素是计算结果，第二个是随机的文字记号。
+比如我们有个模块叫做`LuosyCalculator`，可以执行常见的算术计算（如求和、计算乘积等）。
+但是，它的函数不是返回结果数值，而是返回一个元祖，
+该元祖第一个元素是计算结果，第二个是随机的文字记号。
 
 ```elixir
 defmodule LousyCalculator do
   @spec add(number, number) :: {number, String.t}
-  def add(x, y), do: {x + y, "你用计算器算这个？！"}
+  def add(x, y), do: { x + y, "你用计算器算这个？！" }
 
   @spec multiply(number, number) :: {number, String.t}
-  def multiply(x, y), do: {x * y, "老天，不是吧？！"}
+  def multiply(x, y), do: { x * y, "老天，不是吧？！" }
 end
 ```
 
 从例子中可以看出，元组是复合类型。每个元组都定义了其具体元素类型。
-至于为何是`String.t`而不是`string`，可以参考
-[这篇文章](http://elixir-lang.org/docs/stable/elixir/typespecs.html#Notes)。
+至于为何是`String.t`而不是`string`的原因，可以参考
+[这篇文章](http://elixir-lang.org/docs/stable/elixir/typespecs.html#Notes)，
+此处不多说明。
 
 像这样定义函数规格说明是没问题，但是一次次重复写这种复合类型的
-样式名称`{number, String.t}`，很快会厌烦。
+表示方法`{number, String.t}`，很快会厌烦的吧。
 我们可以使用`@type`指令来声明我们自定义的类型：
 
 ```elixir
@@ -76,9 +81,9 @@ defmodule LousyCalculator do
 end
 ```
 
-指令`@typedoc`，和`@doc`或`@moduledoc`指令类似，被用来记录自定义类型。
+指令`@typedoc`，和`@doc`或`@moduledoc`指令类似，用来解释说明自定义的类型，放在`@type`前面。
 
-自定义类型通过`@type`定义，可以从其定义的模块导出并被外界访问：
+另外，通过`@type`定义的自定义类型，实际上也是模块的成员，可以被外界访问：
 
 ```elixir
 defmodule QuietCalculator do
@@ -94,9 +99,9 @@ end
 
 ### 静态代码分析
 
-Typespecs的作用不仅仅是被用来作为程序文档说明。举个例子，
+给函数等元素标记类型或者签名的作用，不仅仅是被用来作为程序文档说明。举个例子，
 Erlang工具[Dialyzer][Dialyzer](http://www.erlang.org/doc/man/dialyzer.html)
-使用typespecs来进行代码静态分析。
+通过这些类型或者签名标记，进行代码静态分析。
 这就是为什么我们在 `QuiteCalculator` 例子中，
 即使 `make_quite/1` 是个私有函数，也写了函数规格说明。
 
