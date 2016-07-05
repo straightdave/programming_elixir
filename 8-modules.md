@@ -14,7 +14,7 @@ iex> String.length "hello"
 5
 ```
 
-创建自己的模块，用```defmodule```宏。用```def```宏在其中定义函数：
+我们用```defmodule```宏来创建自己的模块。用```def```宏在其中定义函数：
 ```elixir
 iex> defmodule Math do
 ...>   def sum(a, b) do
