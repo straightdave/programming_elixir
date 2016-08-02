@@ -163,7 +163,7 @@ $ elixir spawn.exs
 因为我们希望“管理者”会以更合适的方式重启系统。
 “死快一点（failing fast）”是Elixir软件开发中的一个常见哲学。
 
-```spawn/1```和```spawn_link/1```是Elixir中创建进程的基本方式。
+`spawn/1`和`spawn_link/1`是Elixir中创建进程的基本方式。
 尽管我们到目前为止都是专门调用它们，实际上大部分时间我们会使用基于它们功能的一些抽象操作。
 比如常见的：“任务（Tasks）”。
 
