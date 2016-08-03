@@ -32,7 +32,7 @@ Elixir还是一门初出茅庐的语言：
 [3-基本运算符](../master/3-basic-ops.md) <br/>
 [4-模式匹配](../master/4-pattern-matching.md) <br/>
 [5-流程控制](../master/5-case-cond-if.md) <br/>
-[6-二进制-字符串-字符列表](../master/6-bin-str-charlist.md) <br/>
+[6-二进制串-字符串-字符列表](../master/6-bin-str-charlist.md) <br/>
 [7-键值-图-字典](../master/7-keywords-map-dict.md) <br/>
 [8-模块](../master/8-modules.md) <br/>
 [9-递归](../master/9-recursion.md) <br/>

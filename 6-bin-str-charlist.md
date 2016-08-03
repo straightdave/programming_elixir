@@ -174,8 +174,6 @@ iex> rest
 "llo"
 ```
 
-A complete reference about the binary / bitstring constructor <<>> can be found in the Elixir documentation. This concludes our tour of bitstrings, binaries and strings. A string is a UTF-8 encoded binary and a binary is a bitstring where the number of bits is divisible by 8. Although this shows the flexibility Elixir provides for working with bits and bytes, 99% of the time you will be working with binaries and using the is_binary/1 and byte_size/1 functions.
-
 关于二进制串/比特串的构造器`<< >>`完整的参考，
 请见[Elixir的文档](http://elixir-lang.org/docs/stable/elixir/Kernel.SpecialForms.html#%3C%3C%3E%3E/1)。
 
