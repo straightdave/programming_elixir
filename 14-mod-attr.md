@@ -1,44 +1,40 @@
 14-模块属性
 ===========
-[作为注释](#141-%E4%BD%9C%E4%B8%BA%E6%B3%A8%E9%87%8A)    
-[作为常量](#142-%E4%BD%9C%E4%B8%BA%E5%B8%B8%E9%87%8F)    
-[作为临时存储](#143-%E4%BD%9C%E4%B8%BA%E4%B8%B4%E6%97%B6%E5%AD%98%E5%82%A8)    
 
-在Elixir中，模块属性（attributes）主要服务于三个目的：
-  1. 作为一个模块的注释，通常附加上用户或虚拟机用到的信息
+在Elixir中，模块属性（module attributes）主要服务于三个目的：
+  1. 作为一个模块的注解（annotations），通常附加上用户或虚拟机会用到的信息
   2. 作为常量
-  3. 在编译时作为一个临时的存储机制
+  3. 在编译时作为一个临时的模块存储机制
 
-让我们一个一个讲解。
+下面让我们来一一讲解。
 
-## 14.1-作为注释
-Elixir从Erlang带来了模块属性的概念。例子：
+## 作为注解（annotations）
+
+Elixir从Erlang带来了模块属性的概念。如：
+
 ```elixir
 defmodule MyServer do
   @vsn 2
 end
-```  
+```
 
 这个例子中，我们显式地为该模块设置了 _版本(vsn即version)_ 属性。
-属性标识```@vsn```是预定义的属性名称，会被Erlang虚拟机的代码装载机制使用：
-读取并检查该模块是否在某处被更新了。
-如果不注明版本号，会被自动设置为这个模块函数的md5 checksum。
+`@vsn`是一个系统保留的属性名称，它被Erlang虚拟机的代码装载机制使用，以检查该模块是否被更新过。
+如果不注明版本号，该属性的值会自动设置为模块函数的md5 checksum。
 
-Elixir有个好多系统保留的预定义属性。比如一些常用的：
-  - @moduledoc
-    为整个模块提供文档说明
-  - @doc
-    为该属性后面的函数或宏提供文档说明
-  - @behaviour
-    （注意这个单词是英式拼法）用来注明一个OTP或用户自定义行为
-  - @before_compile
-    提供一个每当模块被编译之前执行的钩子。这使得我们可以在模块被编译之前往里面注入函数。
+Elixir还有好多系统保留的预定义注解。下面是一些比较常用的：
 
-@moduledoc和@doc是很常用的属性，推荐经常使用（写文档）。
+  * `@moduledoc` - 为当前模块提供文档说明
+  * `@doc` - 为该属性标注的函数或宏提供文档说明
+  * `@behaviour` - （注意这个单词是英式拼法）用来注明一个OTP或用户自定义行为
+  * `@before_compile` - 提供一个每当模块被编译之前执行的钩子。这使得我们可以在模块被编译之前往里面注入函数
 
-Elixir视文档为一等公民，提供了很多方法来访问文档。
+`@moduledoc`和`@doc`是目前最常用的注解属性，我们也希望你能够多使用它们。
+Elixir视文档为一等公民，而且提供了很多方法来访问这些文档。
+你可以拓展阅读文章[《用我们官方的方式写Elixir程序文档》](http://elixir-lang.org/docs/stable/elixir/writing-documentation.html)。
 
-让我们回到上几章定义的Math模块，为它添加文档，然后依然保存在math.ex文件中：
+让我们回到上几章定义的`Math`模块，为它添加文档，然后依然保存在math.ex文件中：
+
 ```elixir
 defmodule Math do
   @moduledoc """
@@ -58,11 +54,16 @@ defmodule Math do
 end
 ```
 
-上面例子使用了heredocs注释。heredocs是多行的文本，用三个引号包裹，保持里面内容的格式。
-下面例子演示在iex中，用h命令读取模块的注释：
+Elixir推荐使用markdown语法和多行文本（heredocs）书写容易阅读的文档。
+heredocs是多行的字符串，用三个双引号包裹，它会保持里面内容的格式不变。
+我们可以在IEx中读取任何编译的模块的文档：
+
 ```elixir
 $ elixirc math.ex
 $ iex
+```
+
+```
 iex> h Math # Access the docs for the module Math
 ...
 iex> h Math.sum # Access the docs for the sum function
@@ -73,25 +74,14 @@ Elixir还提供了[ExDoc工具](https://github.com/elixir-lang/ex_doc)，
 利用注释生成HTML页文档。
 
 你可以看看[模块](http://elixir-lang.org/docs/stable/elixir/Module.html)
-里面列出的模块属性列表，看看Elixir还支持那些模块属性。
+里面列出的完整的模块注解列表，Elixir还利用注解来定义[typespecs](../20-typespecs-behaviors.md)。
 
-Elixir还是用这些属性来定义
-[typespecs](http://elixir-lang.org/docs/stable/elixir/Kernel.Typespec.html)：
-  - @spec
-    为一个函数提供specification
-  - @callback
-    为行为回调函数提供spec
-  - @type
-    定义一个@spec中用到的类型
-  - @typep
-    定义一个私有类型，用于@spec
-  - @opaque
-    定义一个opaque类型用于@spec
+本节讲了一些内置的注解。当然，注解可以被开发者和类库扩展使用，来支持自定义的行为。
 
-本节讲了一些内置的属性。当然，属性可以被开发者、被一些类库扩展用来支持自定义的行为。
+## 作为常量
 
-## 14.2-作为常量
-Elixir开发者经常会将模块属性当作常量定义使用：
+Elixir开发者经常会将模块属性当作常量使用：
+
 ```elixir
 defmodule MyServer do
   @initial_state %{host: "147.0.0.1", port: 3456}
@@ -100,9 +90,10 @@ end
 ```
 
 >不同于Erlang，默认情况下用户定义的属性不会被存储在模块里。属性值仅在编译时存在。
-开发者可以通过调用```Module.register_attribute/3```来使属性的行为更接近Erlang。
+开发者可以通过调用`Module.register_attribute/3`来使这种属性的行为更接近Erlang。
 
 访问一个未定义的属性会报警告：
+
 ```elixir
 defmodule MyServer do
   @unknown
@@ -111,6 +102,7 @@ warning: undefined module attribute @unknown, please remove access to @unknown o
 ```
 
 最后，属性也可以在函数中被读取：
+
 ```elixir
 defmodule MyServer do
   @my_data 14
@@ -123,16 +115,20 @@ MyServer.first_data #=> 14
 MyServer.second_data #=> 13
 ```
 
-注意，在函数内读取某属性，读取的是该属性当前值的快照。换句话说，读取的是编译时的值，而非运行时。
-后面我们将看到，这个特点使得属性可以作为模块在编译时的临时存储。
+注意，在函数内读取某属性，读取的是该属性值的一份快照。换句话说，读取的是编译时的值，而非运行时。
+后面我们将看到，这个特点使得属性可以作为模块在编译时的临时存储，十分有用。
 
-## 14.3-作为临时存储
-Elixir组织中有一个项目，叫做[Plug](https://github.com/elixir-lang/plug)。
+## 作为临时存储
+
+Elixir组织中有一个项目，叫做[Plug](https://github.com/elixir-lang/plug)，
 这个项目的目标是创建一个通用的Web库和框架。
 
->类似于ruby的rack
+>注：我想功能应该类似于ruby的rack。你可以定义各种plug，这这些plug会像链条一样，
+按顺序各自对http请求进行加工处理，最后返回。这类似给rails或sinatra定义各种rack中间件，
+也有些类似Java filter的概念。最终，Plug框架会组织和执行它们。
 
-Plug库允许开发者定义它们自己的plug，可以在一个web服务器上运行：
+Plug库允许开发者定义它们自己的plug，运行在web服务器上：
+
 ```elixir
 defmodule MyPlug do
   use Plug.Builder
@@ -153,15 +149,17 @@ IO.puts "Running MyPlug with Cowboy on http://localhost:4000"
 Plug.Adapters.Cowboy.http MyPlug, []
 ```
 
-上面例子我们用了```plug/1```宏来连接各个在处理请求时会被调用的函数。
-在内部，每当你调用```plug/1```时，Plug把参数存储在@plug属性里。
-在模块被编译之前，Plug执行一个回调函数，这个函数定义了处理http请求的方法。
-这个方法将顺序执行所有保存在@plug属性里的plugs。
+上面例子中，我们用了`plug/1`宏来连接处理请求时会被调用的函数。
+在代码背后，每次调用宏`plug/1`时，Plug库把提供的参数（即plug的名字）存储在`@plugs`属性里。
+就在模块被编译之前，Plug会执行一个回调函数，该回调函数定义一个函数（`call/2`）来处理http请求。
+这个函数将按顺序执行所有保存在`@plug`属性里的plugs。
 
-为了理解底层的代码，我们需要宏。因此我们将回顾一下元编程手册里这种模式。
-但是这里的重点是怎样使用属性来存储数据，让开发者得以创建DSL（领域特定语言）。
+要理解底层的代码，我们还需要了解宏，因此我们将在后期《元编程》章节中回顾这个模式。
+这里的重点是怎样使用属性来存储数据，让开发者可以创建DSL（领域特定语言）。
 
-另一个例子来自ExUnit框架，它使用模块属性作为注释和存储：
+另一个例子来自[ExUnit框架](http://elixir-lang.org/docs/stable/ex_unit/)，
+它使用模块属性作为注解和存储：
+
 ```elixir
 defmodule MyTest do
   use ExUnit.Case
@@ -173,8 +171,9 @@ defmodule MyTest do
 end
 ```
 
-ExUnit中，@tag标签被用来注释该测试用例。之后，这些标签可以作为过滤测试用例之用。
-例如，你可以避免执行那些被标记成```:external```的测试，因为它们执行起来很慢。
+ExUnit中，标签（Tag）被用来注解该测试用例。在标记之后，这些标签可以用来过滤测试用例。
+例如，你可以避免执行那些被标记成`:external`的测试，因为它们执行起来很慢而且可以依赖外部的东西。
+但是它们依然在你的工程之内。
 
-本章带你一窥Elixir元编程的冰山一角，讲解了模块属性在开发中是如何扮演关键角色的。   
-下一章将讲解结构体和协议。
+本章带你一窥Elixir元编程的冰山一角，讲解了模块属性在开发中是如何扮演关键角色的。
+下一章将讲解结构体（structs）和协议（protocols），在前进到其它更远的知识点（诸如异常处理等）之前。
