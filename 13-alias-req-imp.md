@@ -5,22 +5,22 @@
 外加一个宏命令`use`，如下：
 
 ```elixir
-# Alias the module so it can be called as Bar instead of Foo.Bar
+# 给模块起别名，让它可以用 Bar 调用而非 Foo.Bar
 alias Foo.Bar, as: Bar
 
-# Ensure the module is compiled and available (usually for macros)
+# 确保模块已被编译且可用（通常为了宏）
 require Foo
 
-# Import functions from Foo so they can be called without the `Foo.` prefix
+# 从 Foo 中导入函数，使之调用时不用加`Foo`前缀
 import Foo
 
-# Invokes the custom code defined in Foo as an extension point
+# 执行定义在 Foo 拓展点内的代码
 use Foo
 ```
 
 下面我们将深入细节。记住前三个之所以称之为“指令”，
 是因为它们的作用域是*词法作用域（lexicla scope）*，
-而`use`是一个普通拓展点（common extension point）。
+而`use`是一个普通拓展点（common extension point），可以将宏展开。
 
 ## alias
 
