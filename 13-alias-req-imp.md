@@ -2,7 +2,7 @@
 =================
 
 为了实现软件重用，Elixir提供了三种指令（`alias`，`require`和`import`），
-外加一个宏命令`user`，如下：
+外加一个宏命令`use`，如下：
 
 ```elixir
 # Alias the module so it can be called as Bar instead of Foo.Bar
