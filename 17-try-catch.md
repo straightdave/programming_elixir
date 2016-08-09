@@ -102,8 +102,6 @@ iex> File.read! "unknown"
     (elixir) lib/file.ex:305: File.read!/1
 ```
 
-Many functions in the standard library follow the pattern of having a counterpart that raises an exception instead of returning tuples to match against. The convention is to create a function (foo) which returns {:ok, result} or {:error, reason} tuples and another function (foo!, same name but with a trailing !) that takes the same arguments as foo but which raises an exception if there’s an error. foo! should return the result (not wrapped in a tuple) if everything goes fine. The File module is a good example of this convention.
-
 但是标准库中的许多函数都遵循这样的模式：不返回元组来模式匹配，而是抛出异常。
 具体说，这种约定是在定义名字不带感叹号后缀的函数时，返回结果信息的元组；
 定义带有感叹号后缀的相同函数时，使用触发异常的机制。
