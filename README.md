@@ -49,3 +49,8 @@ Elixir还是一门初出茅庐的语言：
 [20-Typespecs和behaviors](../master/20-typespecs-behaviors.md) <br/>
 [21-Erlang库](../master/21-erlang-lib.md) <br/>
 [22-下一步](../master/22-next.md) <br/>
+
+
+
+**偷偷写在后面的话**  
+Elixir处于蓬勃发展中，现在学习的ROI比较高；请谨慎、小规模用于生产环境。 
