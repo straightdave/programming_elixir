@@ -225,7 +225,7 @@ end
 
 执行一下```iex kv.exs```：
 ```elixir
-iex> {:ok, pid} = KV.start
+iex> {:ok, pid} = KV.start_link
 #PID<0.62.0>
 iex> send pid, {:get, :hello, self()}
 {:get, :hello, #PID<0.41.0>}
@@ -272,7 +272,7 @@ iex> Agent.get(pid, fn map -> Map.get(map, :hello) end)
 :world
 ```
 
-给```Agent.start/2```方法加上```:name```选项，可以自动为其注册一个名字。
+给```Agent.start_link/2```方法加上```:name```选项，可以自动为其注册一个名字。
 
 除了agents，Elixir还提供了一套API来创建通用服务器（generic servers，称作GenServer），任务等。
 这些都是建立在进程概念之上的实现。其它概念，包括“管理者”树，都可以在《高级》篇里找到更详细的说明。
