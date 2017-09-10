@@ -5,13 +5,10 @@ Elixir，[ɪ'lɪksər]，意为灵丹妙药、圣水，其logo是一枚紫色水
 
 ![logo](http://elixir-lang.org/images/logo/logo.png)
 
-Elixir是一门建立在Erlang虚拟机上的
-[**函数式**](http://baike.baidu.com/view/3476448.htm?fr=aladdin)的系统编程语言，
-支持元编程。
+Elixir是一门建立在Erlang虚拟机上的[**函数式**](http://baike.baidu.com/view/3476448.htm?fr=aladdin)系统编程语言，支持元编程。
 创始人[José Valim](https://github.com/josevalim)是ruby界的知名人士。
-我觉得可以把Elixir看作函数式的ruby语言，或者是语法类似ruby的Erlang。
-Elixir受瞩目的主要原因，是因为它较好地结合了Erlang编程语言的各种优点，以及ruby那样简单易懂的语法
-（Erlang语法比较晦涩）。
+可以把Elixir看作函数式的ruby语言，或者是语法类似ruby的Erlang。
+Elixir受瞩目的主要原因，是因为它较好地结合了Erlang编程语言的各种优点，以及ruby那样简单易懂的语法（Erlang语法比较晦涩）。
 
 Elixir还是一门初出茅庐的语言：
   - 2014年9月1日临晨，1.0.0rc1发布
